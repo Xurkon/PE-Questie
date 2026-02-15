@@ -1,6 +1,6 @@
 # Changelog
 
-## v9.7.2
+## v9.7.3
 
 ### New Features
 - **[Database]** Implemented **Ebonhold Database Module**.
@@ -37,3 +37,6 @@
     - **Instance Filter**: Arrow explicitly hides if the target is in a different instance.
 - **[Map]** Fixed an issue where completed quest icons would persist on the map (`RequestMapUpdate` logic).
 - **[Database]** Updated `wotlkNpcDB.lua` with scraped spawn data for 12 key beast NPCs in Terokkar Forest to ensure accuracy.
+- **[Arrow]** Fixed a nil function error for `_CollectObjective` when processing incomplete quests.
+- **[Arrow]** Fixed syntax issues that prevented `QuestieArrow` module from initializing correctly.
+- **[Database]** Fixed a runtime crash in `ZoneDB` when encountering maps with no AreaId mapping (e.g., Kalimdor).

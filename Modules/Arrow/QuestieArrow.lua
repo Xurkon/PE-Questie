@@ -483,8 +483,8 @@ function QuestieArrow:UpdateNearestTargets()
                                                 local uiMapId = ZoneDB:GetUiMapIdByAreaId(zone)
                                                 if uiMapId and x and y then
                                                     local targetX, targetY, targetInstance = HBD
-                                                    :GetWorldCoordinatesFromZone(
-                                                        x / 100.0, y / 100.0, uiMapId)
+                                                        :GetWorldCoordinatesFromZone(
+                                                            x / 100.0, y / 100.0, uiMapId)
                                                     if targetX and targetY and targetInstance then
                                                         local dist = HBD:GetWorldDistance(targetInstance, playerX,
                                                             playerY,
@@ -547,6 +547,7 @@ function QuestieArrow:UpdateNearestTargets()
                         end
                     end
 
+
                     if finisher.waypoints then
                         for zone, waypoints in pairs(finisher.waypoints) do
                             -- Auto Logic: Hide distant quests (different zone)
@@ -596,47 +597,47 @@ function QuestieArrow:UpdateNearestTargets()
 
                 return
             end
+        end
 
-            local function _CollectObjective(objective)
-                if not objective or not objective.spawnList then
-                    return
-                end
+        local function _CollectObjective(objective)
+            if not objective or not objective.spawnList then
+                return
+            end
 
-                if objective.Completed == true or objective.Completed == 1 then
-                    return
-                end
+            if objective.Completed == true or objective.Completed == 1 then
+                return
+            end
 
-                for _, spawnData in pairs(objective.spawnList) do
-                    if spawnData and spawnData.Spawns then
-                        for zone, spawns in pairs(spawnData.Spawns) do
-                            -- Auto Logic: Hide distant quests (different zone)
-                            if usingAutoLogic and zone ~= playerZoneId then
-                                -- continue
-                            else
-                                for _, spawn in pairs(spawns) do
-                                    local uiMapId = ZoneDB:GetUiMapIdByAreaId(zone)
-                                    if uiMapId then
-                                        local targetX, targetY, targetInstance = HBD:GetWorldCoordinatesFromZone(
-                                            spawn[1] / 100.0, spawn[2] / 100.0, uiMapId)
-                                        if targetX and targetY and targetInstance then
-                                            local dist = HBD:GetWorldDistance(targetInstance, playerX, playerY, targetX,
-                                                targetY)
-                                            if dist then
-                                                if targetInstance ~= playerInstance then
-                                                    dist = 500000 + dist * 100
-                                                end
-
-                                                table.insert(sortedTargets, {
-                                                    x = spawn[1],
-                                                    y = spawn[2],
-                                                    uiMapId = uiMapId,
-                                                    title = quest.name,
-                                                    questLevel = quest.level,
-                                                    iconPath = ResolveIconTexture(objective.Icon) or
-                                                        ResolveIconTexture(spawnData and spawnData.Icon),
-                                                    distance = dist,
-                                                })
+            for _, spawnData in pairs(objective.spawnList) do
+                if spawnData and spawnData.Spawns then
+                    for zone, spawns in pairs(spawnData.Spawns) do
+                        -- Auto Logic: Hide distant quests (different zone)
+                        if usingAutoLogic and zone ~= playerZoneId then
+                            -- continue
+                        else
+                            for _, spawn in pairs(spawns) do
+                                local uiMapId = ZoneDB:GetUiMapIdByAreaId(zone)
+                                if uiMapId then
+                                    local targetX, targetY, targetInstance = HBD:GetWorldCoordinatesFromZone(
+                                        spawn[1] / 100.0, spawn[2] / 100.0, uiMapId)
+                                    if targetX and targetY and targetInstance then
+                                        local dist = HBD:GetWorldDistance(targetInstance, playerX, playerY, targetX,
+                                            targetY)
+                                        if dist then
+                                            if targetInstance ~= playerInstance then
+                                                dist = 500000 + dist * 100
                                             end
+
+                                            table.insert(sortedTargets, {
+                                                x = spawn[1],
+                                                y = spawn[2],
+                                                uiMapId = uiMapId,
+                                                title = quest.name,
+                                                questLevel = quest.level,
+                                                iconPath = ResolveIconTexture(objective.Icon) or
+                                                    ResolveIconTexture(spawnData and spawnData.Icon),
+                                                distance = dist,
+                                            })
                                         end
                                     end
                                 end
@@ -646,6 +647,8 @@ function QuestieArrow:UpdateNearestTargets()
                 end
             end
         end
+
+
 
         if quest.Objectives then
             for _, objective in pairs(quest.Objectives) do
@@ -728,7 +731,7 @@ function QuestieArrow:SetTarget(title, zoneOrUiMapId, x, y)
         y = y,
         uiMapId = uiMapId,
         title = title,
-        distance = 0, -- Manual targets always go first
+        distance = 0,     -- Manual targets always go first
     } }
 
     EnsureArrowFrame()

@@ -46,7 +46,7 @@ local UiMapIdOverrides = {
     [246] = 3713
 }
 local parentZoneToSubZone = {} -- Generated
-local zoneMap = {} -- Generated
+local zoneMap = {}             -- Generated
 
 
 function ZoneDB:Initialize()
@@ -96,15 +96,16 @@ function ZoneDB:GetAreaIdByUiMapId(uiMapId)
 
             -- Only print if debug is enabled.
             if Questie.db.profile.debugEnabled then
-                Questie:Error("[ZoneDB:GetAreaIdByUiMapId] : ", "UiMapId", uiMapId, "has multiple AreaIds:", foundId, areaId)
+                Questie:Error("[ZoneDB:GetAreaIdByUiMapId] : ", "UiMapId", uiMapId, "has multiple AreaIds:", foundId,
+                    areaId)
             end
         end
     end
     if foundId then -- debug --TechnoHunter adding debug print to report found AreaId
         --if Questie.db.profile.debugEnabled then
-            --local uiMapInfo = C_Map.GetMapInfo(uiMapId)
-            --local foundName = C_Map.GetAreaInfo(foundId)
-            --Questie:Debug(Questie.DEBUG_DEVELOP, "[ZoneDB:GetAreaIdByUiMapId] : ", "Found AreaId", foundName, ":", foundId, " for UiMapId", uiMapInfo.name, ":", uiMapId, "direct match")
+        --local uiMapInfo = C_Map.GetMapInfo(uiMapId)
+        --local foundName = C_Map.GetAreaInfo(foundId)
+        --Questie:Debug(Questie.DEBUG_DEVELOP, "[ZoneDB:GetAreaIdByUiMapId] : ", "Found AreaId", foundName, ":", foundId, " for UiMapId", uiMapInfo.name, ":", uiMapId, "direct match")
         --end
         return foundId
     else
@@ -115,14 +116,19 @@ function ZoneDB:GetAreaIdByUiMapId(uiMapId)
             local mapInfo = C_Map.GetMapInfo(uiMapId)
             local areaName = C_Map.GetAreaInfo(areaId)
             if mapInfo and mapInfo.name == areaName then
-                Questie:Debug(Questie.DEBUG_DEVELOP, "[ZoneDB:GetAreaIdByUiMapId] : ", "Found AreaId", areaName, ":", areaId, "for UiMapId", mapInfo.name, ":", uiMapId, "by name")
+                Questie:Debug(Questie.DEBUG_DEVELOP, "[ZoneDB:GetAreaIdByUiMapId] : ", "Found AreaId", areaName, ":",
+                    areaId, "for UiMapId", mapInfo.name, ":", uiMapId, "by name")
                 return areaId
             end
         end
-        error("No AreaId found for UiMapId: " .. uiMapId .. ":" .. C_Map.GetMapInfo(uiMapId).name)
+        if Questie.db.profile.debugEnabled then
+            Questie:Debug(Questie.DEBUG_CRITICAL,
+                "No AreaId found for UiMapId: " ..
+                uiMapId .. ":" .. (C_Map.GetMapInfo(uiMapId) and C_Map.GetMapInfo(uiMapId).name or "nil"))
+        end
+        return nil
     end
 end
-
 
 ---@param areaId AreaId
 function ZoneDB:GetDungeonLocation(areaId)
@@ -154,7 +160,6 @@ function ZoneDB:GetParentZoneId(areaId)
     return dungeonParentZones[areaId] or subZoneToParentZone[areaId]
 end
 
-
 -- We keep localized variables outside of the function only used by GetZonesWithQuests
 do
     -- This is for yielding
@@ -163,87 +168,82 @@ do
 
     --Keep yield here as there is potentially a case where this wants to be run outside of a coroutine
 
----@param yield boolean?
----@return table
-function ZoneDB:GetZonesWithQuests(yield)
-    local count = 0
+    ---@param yield boolean?
+    ---@return table
+    function ZoneDB:GetZonesWithQuests(yield)
+        local count = 0
 
-    local function ProcessQuestId(questId)
-        if (not QuestieCorrections.hiddenQuests[questId]) then
-            if QuestiePlayer.HasRequiredRace(QuestieDB.QueryQuestSingle(questId, "requiredRaces"))
-                and QuestiePlayer.HasRequiredClass(QuestieDB.QueryQuestSingle(questId, "requiredClasses")) then
+        local function ProcessQuestId(questId)
+            if (not QuestieCorrections.hiddenQuests[questId]) then
+                if QuestiePlayer.HasRequiredRace(QuestieDB.QueryQuestSingle(questId, "requiredRaces"))
+                    and QuestiePlayer.HasRequiredClass(QuestieDB.QueryQuestSingle(questId, "requiredClasses")) then
+                    local zoneOrSort = QuestieDB.QueryQuestSingle(questId, "zoneOrSort")
+                    local requiredSkill = QuestieDB.QueryQuestSingle(questId, "requiredSkill")
 
-				local zoneOrSort = QuestieDB.QueryQuestSingle(questId, "zoneOrSort")
-				local requiredSkill = QuestieDB.QueryQuestSingle(questId, "requiredSkill")
+                    if type(requiredSkill) == "table"
+                        and requiredSkill[1]
+                        and requiredSkill[1] ~= QuestieProfessions.professionKeys.RIDING then
+                        local sortId = QuestieProfessions:GetSortIdByProfessionId(requiredSkill[1])
+                        zoneOrSort = sortId or QuestieDB.sortKeys.SPECIAL
 
-				if type(requiredSkill) == "table"
-					and requiredSkill[1]
-					and requiredSkill[1] ~= QuestieProfessions.professionKeys.RIDING then
+                        if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
+                        zoneMap[zoneOrSort][questId] = true
+                    elseif type(zoneOrSort) == "number" and zoneOrSort > 0 then
+                        local parentZoneId = ZoneDB:GetParentZoneId(zoneOrSort)
 
-					local sortId = QuestieProfessions:GetSortIdByProfessionId(requiredSkill[1])
-					zoneOrSort = sortId or QuestieDB.sortKeys.SPECIAL
+                        if parentZoneId then
+                            if (not zoneMap[parentZoneId]) then zoneMap[parentZoneId] = {} end
+                            zoneMap[parentZoneId][questId] = true
+                        else
+                            if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
+                            zoneMap[zoneOrSort][questId] = true
+                        end
+                    elseif type(zoneOrSort) == "number" and _ZoneDB:IsSpecialQuest(zoneOrSort) then
+                        if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
+                        zoneMap[zoneOrSort][questId] = true
+                    else
+                        local startedBy = QuestieDB.QueryQuestSingle(questId, "startedBy")
+                        if startedBy then
+                            zoneMap = _ZoneDB:GetZonesWithQuestsFromNPCs(zoneMap, startedBy[1], questId)
+                            zoneMap = _ZoneDB:GetZonesWithQuestsFromObjects(zoneMap, startedBy[2], questId)
+                        end
 
-					if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
-					zoneMap[zoneOrSort][questId] = true
+                        local finishedBy = QuestieDB.QueryQuestSingle(questId, "finishedBy")
+                        if finishedBy then
+                            zoneMap = _ZoneDB:GetZonesWithQuestsFromNPCs(zoneMap, finishedBy[1], questId)
+                            zoneMap = _ZoneDB:GetZonesWithQuestsFromObjects(zoneMap, finishedBy[2], questId)
+                        end
+                    end
+                end
+            end
 
-				elseif type(zoneOrSort) == "number" and zoneOrSort > 0 then
-					local parentZoneId = ZoneDB:GetParentZoneId(zoneOrSort)
-
-					if parentZoneId then
-						if (not zoneMap[parentZoneId]) then zoneMap[parentZoneId] = {} end
-						zoneMap[parentZoneId][questId] = true
-					else
-						if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
-						zoneMap[zoneOrSort][questId] = true
-					end
-
-				elseif type(zoneOrSort) == "number" and _ZoneDB:IsSpecialQuest(zoneOrSort) then
-					if (not zoneMap[zoneOrSort]) then zoneMap[zoneOrSort] = {} end
-					zoneMap[zoneOrSort][questId] = true
-
-				else
-					local startedBy = QuestieDB.QueryQuestSingle(questId, "startedBy")
-					if startedBy then
-						zoneMap = _ZoneDB:GetZonesWithQuestsFromNPCs(zoneMap, startedBy[1], questId)
-						zoneMap = _ZoneDB:GetZonesWithQuestsFromObjects(zoneMap, startedBy[2], questId)
-					end
-
-					local finishedBy = QuestieDB.QueryQuestSingle(questId, "finishedBy")
-					if finishedBy then
-						zoneMap = _ZoneDB:GetZonesWithQuestsFromNPCs(zoneMap, finishedBy[1], questId)
-						zoneMap = _ZoneDB:GetZonesWithQuestsFromObjects(zoneMap, finishedBy[2], questId)
-					end
-				end
+            if yield then
+                count = count + 1
+                if count >= yieldAmount then
+                    count = 0
+                    coroutine.yield()
+                end
             end
         end
 
-        if yield then
-            count = count + 1
-            if count >= yieldAmount then
-                count = 0
-                coroutine.yield()
+        -- 1) Base Questie quests (QuestPointers values must be numbers; ignore anything weird)
+        for questId, ptr in pairs(QuestieDB.QuestPointers) do
+            if type(ptr) == "number" then
+                ProcessQuestId(questId)
             end
         end
-    end
 
-    -- 1) Base Questie quests (QuestPointers values must be numbers; ignore anything weird)
-    for questId, ptr in pairs(QuestieDB.QuestPointers) do
-        if type(ptr) == "number" then
-            ProcessQuestId(questId)
+        -- 2) Ascension custom quests (from overrides list)
+        if type(QuestieDB.ascensionQuestIds) == "table" then
+            for questId in pairs(QuestieDB.ascensionQuestIds) do
+                ProcessQuestId(questId)
+            end
         end
-    end
 
-    -- 2) Ascension custom quests (from overrides list)
-    if type(QuestieDB.ascensionQuestIds) == "table" then
-        for questId in pairs(QuestieDB.ascensionQuestIds) do
-            ProcessQuestId(questId)
-        end
+        if yield then coroutine.yield() end
+        zoneMap = _ZoneDB:SplitSeasonalQuests()
+        return zoneMap
     end
-
-    if yield then coroutine.yield() end
-    zoneMap = _ZoneDB:SplitSeasonalQuests()
-    return zoneMap
-end
 end
 
 
@@ -354,8 +354,6 @@ function ZoneDB:GetRelevantZones()
     return zones
 end
 
-
-
 ----- Tests -----
 
 function _ZoneDB:RunTests()
@@ -373,9 +371,9 @@ function _ZoneDB:RunTests()
         if map.mapType ~= Enum.UIMapType.World and map.mapType ~= Enum.UIMapType.Continent and map.mapType ~= Enum.UIMapType.Cosmic then
             local success, result = pcall(ZoneDB.GetAreaIdByUiMapId, ZoneDB, map.mapID)
             if not success and not buggedMaps[map.mapID] then
-                Questie:Error("[ZoneDBTests] ZoneDB.GetAreaIdByUiMapId fails for " .. map.name .. " (" .. map.mapID .. "). Result: " .. result)
+                Questie:Error("[ZoneDBTests] ZoneDB.GetAreaIdByUiMapId fails for " ..
+                map.name .. " (" .. map.mapID .. "). Result: " .. result)
             end
-
         end
     end
     Questie:Debug(Questie.DEBUG_CRITICAL, "[" .. Questie:Colorize("ZoneDBTests", "yellow") .. "] Testing ZoneDB done")
