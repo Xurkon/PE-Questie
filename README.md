@@ -1,2 +1,194 @@
-# PE-Questie
-Questie designed for compatibility on Project Ebonhold server.
+# \# Questie-335
+
+# 
+
+# A fork of the WoW Classic \*\*Questie\*\* addon aiming to provide compatibility with \*\*ANY\*\* private server.
+
+# 
+
+# \## Installation
+
+# \- \[Download](https://github.com/Xurkon/PE-Questie/releases) the archive.
+
+# \- Extract it into the `Interface/AddOns/` directory. The folder name should be `Questie-335`.
+
+# \- If you are playing on a custom server that emulates a previous expansion using the \*\*3.3.5\*\* client, you can add `-Classic` or `-TBC` to the addon folder name to load only the required files for the chosen expansion.
+
+# \- If your server doesn't provide a patch for the world map, enable the in-game setting: `Options → Advanced → Use WotLK map data`.
+
+# 
+
+# \## Fixes
+
+# \- \*\*Nameplates\*\*
+
+# &nbsp; - Skips \*\*Ascension Nameplates\*\* and works with other addons.
+
+# 
+
+# \- \*\*Tracker\*\*
+
+# &nbsp; 1. Compatible with the Ascension API and doesn't fail with auto-turn-in quests.
+
+# &nbsp; 2. No more missing header issues.
+
+# &nbsp; 3. Refreshes correctly when accepting, completing, or abandoning quests.
+
+# 
+
+# \- \*\*Tooltips\*\*
+
+# &nbsp; 1. Fixed all errors.
+
+# &nbsp; 2. New: shows if an NPC drops an item that starts a quest.
+
+# 
+
+# \- \*\*Custom IDs\*\*
+
+# &nbsp; - Supports large integer IDs.
+
+# 
+
+# \- \*\*Minimap\*\*
+
+# &nbsp; - Fixed errors when zooming the minimap.
+
+# 
+
+# \- \*\*World Map\*\*
+
+# &nbsp; 1. Supports Ascension `WorldMapFrame` when minimized and draws icons correctly.
+
+# &nbsp; 2. Works with \*\*Mapster\*\* and \*\*Magnify-WotLK\*\*.
+
+# 
+
+# \- \*\*New Content (Maps \& Quests)\*\*
+
+# &nbsp; - Currently supports \*\*Ascension starter zones\*\* and some \*\*Ebonhold objectives\*\*.
+
+# 
+
+# 
+
+# 
+
+# \## Features
+
+# 
+
+# \### Ascension Scaling system
+
+# \- Scaling all quest to character level like Ascension Scaling system
+
+# 
+
+# \### Show quests on map
+
+# \- Show notes for quest start points, turn in points, and objectives.
+
+# 
+
+# !\[Questie Quest Givers](https://i.imgur.com/4abi5yu.png)
+
+# !\[Questie Complete](https://i.imgur.com/DgvBHyh.png)
+
+# !\[Questie Tooltip](https://i.imgur.com/uPykHKC.png)
+
+# 
+
+# \### Quest Tracker
+
+# \- Improved quest tracker:
+
+# &nbsp;   - Automatically tracks quests on accepting (instead of progressing)
+
+# &nbsp;   - Can show all 20 quests from the log (instead of default 5)
+
+# &nbsp;   - Left click quest to open quest log (configurable)
+
+# &nbsp;   - Right-click for more options, e.g.:
+
+# &nbsp;       - Focus quest (makes other quest icons translucent)
+
+# &nbsp;       - Point arrow towards objective (requires TomTom addon)
+
+# 
+
+# !\[QuestieTracker](https://user-images.githubusercontent.com/8838573/67285596-24dbab00-f4d8-11e9-9ae1-7dd6206b5e48.png)
+
+# 
+
+# \### Quest Communication
+
+# \- You can see party members quest progress on the tooltip.
+
+# \- At least Questie version 5.0.0 is required by everyone in the party for it to work, tell your friends to update!
+
+# 
+
+# 
+
+# \### Tooltips
+
+# \- Show tooltips on map notes and quest NPCs/objects.
+
+# \- Holding Shift while hovering over a map icon displays more information, like quest XP.
+
+# 
+
+# 
+
+# \#### Quest Information
+
+# \- Event quests are shown when events are active!
+
+# 
+
+# \#### Waypoints
+
+# \- Waypoint lines for quest givers showing their pathing.
+
+# 
+
+# \### Journey Log
+
+# \- Questie records the steps of your journey in the "My Journey" window. (right-click on minimap button to open)
+
+# 
+
+# !\[Journey](https://user-images.githubusercontent.com/8838573/67285651-3cb32f00-f4d8-11e9-95d8-e8ceb2a8d871.png)
+
+# 
+
+# \### Quests by Zone
+
+# \- Questie lists all the quests of a zone divided between completed and available quest. Gotta complete 'em all. (right-click on minimap button to open)
+
+# 
+
+# !\[QuestsByZone](https://user-images.githubusercontent.com/8838573/67285665-450b6a00-f4d8-11e9-9283-325d26c7c70d.png)
+
+# 
+
+# \### Search
+
+# \- Questie's database can be searched. (right-click on minimap button to open)
+
+# 
+
+# !\[Search](https://user-images.githubusercontent.com/8838573/67285691-4f2d6880-f4d8-11e9-8656-b3e37dce2f05.png)
+
+# 
+
+# \### Configuration
+
+# \- Extensive configuration options. (left-click on minimap button to open)
+
+# 
+
+# !\[config](https://user-images.githubusercontent.com/8838573/67285731-61a7a200-f4d8-11e9-9026-b1eeaad0d721.png)
+
+
+

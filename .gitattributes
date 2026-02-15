@@ -1,0 +1,9 @@
+.gitignore export-ignore
+.gitattributes export-ignore
+workflow export-ignore
+docs export-ignore
+.github export-ignore
+*.md export-ignore
+.agent export-ignore
+.gemini export-ignore
+.claude export-ignore
