@@ -60,6 +60,9 @@ end
 ---@param starterId number The ID of the object or NPC the tooltip should show on
 ---@param key string @Either m_<npcId> or o_<objectId>
 function QuestieTooltips:RegisterQuestStartTooltip(questId, name, starterId, key)
+    if not name then
+        return
+    end
     if not QuestieTooltips.lookupByKey[key] then
         QuestieTooltips.lookupByKey[key] = {};
     end

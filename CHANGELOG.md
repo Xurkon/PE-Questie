@@ -1,5 +1,12 @@
 # Changelog
 
+## v9.7.4
+
+### Fixes
+- **[Tooltips]** Fixed "attempt to concatenate local 'name' (a nil value)" error when quest starters/finishers have missing names in the database.
+- **[Database]** Fixed "Unknown Zone" issue for custom quests by correcting Zone ID index usage (swapped `[6]` RequiredRaces for `[17]` ZoneID).
+- **[Database]** Corrected Dragonblight Zone ID in custom quest definitions.
+
 ## v9.7.3
 
 ### New Features
