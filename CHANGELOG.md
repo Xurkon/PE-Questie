@@ -8,6 +8,22 @@
 - **[Database]** Fixed "Unknown Zone" issue for custom quests by correcting Zone ID index usage (swapped `[6]` RequiredRaces for `[17]` ZoneID).
 - **[Database]** Corrected Dragonblight Zone ID in custom quest definitions.
 
+### New Quests
+- **[Database]** Added **Morogh Missions** (ID 50098) - *Dun Morogh*
+    - Objective: Complete any 6 quests in Dun Morogh. Auto-completes upon reaching the objective.
+- **[Database]** Added **Azuremyst Aid** (ID 50100) - *Azuremyst Isle*
+    - Objective: Complete any 6 quests in Azuremyst Isle. Auto-completes upon reaching the objective.
+- **[Database]** Added **Stormforged Scales** (ID 50066) - *The Storm Peaks*
+    - Objective: Kill 30 Dragonkin. Includes 8 Dragonkin NPC types with full spawn coordinates.
+- **[Database]** Added **Peak Predators** (ID 50095) - *The Storm Peaks*
+    - Objective: Kill 75 Beasts. Includes 24 Beast NPC types with full spawn coordinates.
+- **[Database]** Added **Peak Predators** (ID 50096) - *Icecrown*
+    - Objective: Kill 75 Beasts. Includes 12 Beast NPC types with full spawn coordinates.
+- **[Database]** Added **Icecrown Advance** (ID 50151) - *Icecrown*
+    - Objective: Complete any 6 quests in Icecrown. Auto-completes upon reaching the objective.
+- **[Database]** Added **Storm Peaks Trophy** (ID 50205) - *The Storm Peaks*
+    - Objective: Kill 1 Rare in The Storm Peaks. Includes 4 Rare NPC types (Skoll, Time-Lost Proto-Drake, Vyragosa, Dirkee) with full spawn coordinates.
+
 ## v9.7.3
 
 ### New Features

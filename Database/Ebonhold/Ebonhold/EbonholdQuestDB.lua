@@ -9,7 +9,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 67,                  -- Quest level
         [5] = 64,                  -- Min level
-        [6] = 3518,                -- Zone (Nagrand)
+        [17] = 3518,               -- Zone (Nagrand)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 30 Elementals in Nagrand"
@@ -27,8 +27,8 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 60,  -- Group size
+
+        [30] = 60, -- Group size
     },
 
     -- Quest 50085: Savage Heights
@@ -38,7 +38,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 70,                  -- Quest level
         [5] = 67,                  -- Min level
-        [6] = 3522,                -- Zone (Blade's Edge Mountains)
+        [17] = 3522,               -- Zone (Blade's Edge Mountains)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 75 Beasts in Blade's Edge Mountains"
@@ -57,8 +57,8 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 75,  -- Kill count
+
+        [30] = 75, -- Kill count
     },
 
     -- Quest 50086: Unstable Fauna
@@ -68,7 +68,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 70,                  -- Quest level
         [5] = 67,                  -- Min level
-        [6] = 3523,                -- Zone (Netherstorm)
+        [17] = 3523,               -- Zone (Netherstorm)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 75 Beasts in Netherstorm"
@@ -87,8 +87,8 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 75,  -- Kill count
+
+        [30] = 75, -- Kill count
     },
 
     -- Quest 50201: Dragonblight Trophy
@@ -98,7 +98,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } },   -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 75,                    -- Quest level
         [5] = 71,                    -- Min level
-        [6] = 65,                    -- Zone (Dragonblight)
+        [17] = 65,                   -- Zone (Dragonblight)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 1 Rare in Dragonblight"
@@ -117,8 +117,8 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 1,   -- Kill count (only 1 rare needed)
+
+        [30] = 1, -- Kill count (only 1 rare needed)
     },
 
     -- Quest 50160: Redridge Trophy
@@ -188,7 +188,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 65,                  -- Quest level
         [5] = 62,                  -- Min level
-        [6] = 3519,                -- Zone (Terokkar Forest)
+        [17] = 3519,               -- Zone (Terokkar Forest)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 75 Beasts in Terokkar Forest"
@@ -207,8 +207,38 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 75,  -- Kill count
+
+        [30] = 75, -- Kill count
+    },
+
+    -- Quest 50082: Marsh Predators
+    -- Kill 75 beasts in Zangarmarsh
+    [50082] = {
+        [1] = "Marsh Predators",   -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 64,                  -- Quest level
+        [5] = 62,                  -- Min level
+        [17] = 3521,               -- Zone (Zangarmarsh)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 75 Beasts in Zangarmarsh"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All beasts in Zangarmarsh
+                    { 19349, 19730, 18285, 18281, 18135, 18286, 18283, 18680, 18280, 18132, 20197, 18133, 18212, 18214, 19706, 20196, 18129, 18213, 18128, 20279, 20198, 18130, 20283, 18134, 19729, 20290, 20324, 20280, 18138, 17953, 18332, 18201, 18131, 20387 },
+                    19349, -- RootId: Thornfang Ravager (representative beast)
+                    "Beast slain"
+                }
+            }
+        },
+
+        [30] = 75, -- Kill count
     },
 
     -- Quest 50060: Skies of Blade's Edge
@@ -246,7 +276,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 68,                  -- Required level (Min level)
         [5] = 71,                  -- Quest level
-        [6] = 3537,                -- Zone (Borean Tundra)
+        [17] = 3537,               -- Zone (Borean Tundra)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill Elementals in Borean Tundra"
@@ -259,14 +289,44 @@ EbonholdDB.questData = EbonholdDB.questData or {
             {    -- [5] killCreditObjective
                 {
                     -- All 15 elemental-type NPCs in Borean Tundra
-                    { 25417, 32357, 25715, 25514, 25419, 24601, 25415, 25226, 25742, 25707, 25709, 26045, 25376, 25418, 25416 },
+                    { 25417, 32357, 25715, 25514, 25419, 24601, 25415, 25226, 25707, 25709, 26045, 25376, 25418, 25416 },
                     25417, -- RootId: Raging Boiler (representative elemental)
                     "Elementals slain"
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 75,  -- Kill count (Assumed generic high count for zone farming quests, user said "amount varies", so we don't hardcode it in logic but usually DB needs a number. 75 puts it in line with others.)
+
+        [30] = 75, -- Kill count (Assumed generic high count for zone farming quests, user said "amount varies", so we don't hardcode it in logic but usually DB needs a number. 75 puts it in line with others.)
+    },
+
+    -- Quest 50031: Stormbound
+    -- Kill 30 Elementals in Storm Peaks
+    [50031] = {
+        [1] = "Stormbound", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 68,                  -- Required level (Min level)
+        [5] = 73,                  -- Quest level
+        [17] = 67,                 -- Zone (Storm Peaks)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill Elementals in Storm Peaks"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All Storm Peaks elementals scraped from filter page
+                    { 29504, 30450, 30184, 29844, 30387, 30160, 29624, 30001, 30474, 30120, 30053 },
+                    30120, -- RootId: Seething Revenant (representative elemental)
+                    "Elementals slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count (30 elementals as per quest name)
     },
 
     -- Quest 50087: Shadowed Beasts
@@ -276,7 +336,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 67,                  -- Quest level
         [5] = 65,                  -- Min level
-        [6] = 3520,                -- Zone (Shadowmoon Valley)
+        [17] = 3520,               -- Zone (Shadowmoon Valley)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 75 Beasts in Shadowmoon Valley"
@@ -295,8 +355,8 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 75,  -- Kill count
+
+        [30] = 75, -- Kill count
     },
 
     -- Quest 50064: Heart of the Dragonflights
@@ -306,7 +366,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } },          -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 73,                           -- Quest level
         [5] = 71,                           -- Min level
-        [6] = 65,                           -- Zone (Dragonblight)
+        [17] = 3524,                        -- Zone (Dragonblight)
         [8] = {
             "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Kill 30 Dragonkin in Dragonblight"
@@ -325,8 +385,188 @@ EbonholdDB.questData = EbonholdDB.questData or {
                 }
             }
         },
-        [17] = nil, -- XP reward
-        [30] = 30,  -- Kill count
+
+        [30] = 30, -- Kill count
+    },
+
+    -- Quest 50095: Peak Predators
+    -- Kill 75 beasts in The Storm Peaks
+    [50095] = {
+        [1] = "Peak Predators", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 68,                  -- Required level (Min level)
+        [5] = 73,                  -- Quest level
+        [17] = 67,                 -- Zone (The Storm Peaks)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill Beasts in The Storm Peaks"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All 24 beast NPCs in Storm Peaks (hostile to both factions)
+                    { 29411, 29590, 30148, 32475, 29958, 30164, 29358, 29469, 30422, 30445, 30291, 29412, 30448, 29461, 29605, 30447, 29319, 29390, 29562, 30340, 30292, 29808, 30174, 34920 },
+                    29319, -- RootId: Icepaw Bear (representative beast)
+                    "Beasts slain"
+                }
+            }
+        },
+
+        [30] = 75, -- Kill count (75 beasts as per quest name)
+    },
+
+    -- Quest 50096: Peak Predators
+    -- Kill 75 beasts in Icecrown
+    [50096] = {
+        [1] = "Peak Predators", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 73,                  -- Required level (Min level)
+        [5] = 77,                  -- Quest level
+        [17] = 210,                -- Zone (Icecrown)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill Beasts in Icecrown"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All 12 beast NPCs in Icecrown (hostile to both factions)
+                    { 29392, 30206, 30330, 30430, 31265, 31747, 32484, 35060, 35061, 35071, 35470, 35482 },
+                    29392, -- RootId: Ravenous Jaws (representative beast)
+                    "Beasts slain"
+                }
+            }
+        },
+
+        [30] = 75, -- Kill count (75 beasts as per quest name)
+    },
+
+    -- Quest 50151: Icecrown Advance
+    -- Requires completing any 6 quests in Icecrown
+    -- Auto-complete, no turn-in location
+    [50151] = {
+        [1] = "Icecrown Advance", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 73,                  -- Min level
+        [5] = 80,                  -- Quest level
+        [17] = 210,                -- Zone (Icecrown)
+        [8] = {
+            "This quest requires completing any 6 quests in Icecrown. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Icecrown"
+        },
+    },
+
+    -- Quest 50205: Storm Peaks Trophy
+    -- Kill 1 rare in The Storm Peaks
+    [50205] = {
+        [1] = "Storm Peaks Trophy", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 68,                  -- Min level
+        [5] = 80,                  -- Quest level
+        [17] = 67,                 -- Zone (The Storm Peaks)
+        [8] = {
+            "Kill a rare NPC in The Storm Peaks to complete this quest.",
+            "Kill a rare in The Storm Peaks"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All 4 rare NPCs in The Storm Peaks
+                    { 35189, 32491, 32630, 32500 },
+                    35189, -- RootId: Skoll (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (1 rare)
+    },
+
+    -- Quest 50066: Stormforged Scales
+    -- Kill 30 dragonkin in The Storm Peaks
+    [50066] = {
+        [1] = "Stormforged Scales", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 68,                  -- Min level
+        [5] = 80,                  -- Quest level
+        [17] = 67,                 -- Zone (The Storm Peaks)
+        [8] = {
+            "The dragons of the Storm Peaks must be dealt with before we can proceed with our plans. Destroy 30 dragonkin in the Storm Peaks to show the Storm Peaks dragons that they are not welcome here.",
+            "Slain: 0/30"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All 8 dragonkin NPCs in The Storm Peaks (zone 67) with valid spawn data
+                    { 32491, 32630, 29753, 29755, 29460, 30275, 30461 },
+                    32491, -- RootId: Time-Lost Proto-Drake (representative dragonkin)
+                    "Dragonkin slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count (30 dragonkin)
+    },
+
+    -- Quest 50145: Fjord Front
+    -- Requires completing any 6 quests in Howling Fjord
+    -- Auto-complete, no turn-in location
+    [50145] = {
+        [1] = "Fjord Front",       -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 74,                  -- Quest level
+        [5] = 68,                  -- Min level
+        [17] = 495,                -- Zone (Howling Fjord)
+        [8] = {
+            "This quest requires completing any 6 quests in Howling Fjord. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Howling Fjord"
+        },
+    },
+
+    -- Quest 50098: Morogh Missions
+    -- Requires completing any 6 quests in Dun Morogh
+    -- Auto-complete, no turn-in location
+    [50098] = {
+        [1] = "Morogh Missions", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 1,                   -- Min level
+        [5] = 60,                  -- Quest level
+        [17] = 1,                  -- Zone (Dun Morogh)
+        [8] = {
+            "This quest requires completing any 6 quests in Dun Morogh. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Dun Morogh"
+        },
+    },
+
+    -- Quest 50100: Azuremyst Aid
+    -- Requires completing any 6 quests in Azuremyst Isle
+    -- Auto-complete, no turn-in location
+    [50100] = {
+        [1] = "Azuremyst Aid",    -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 1,                   -- Min level
+        [5] = 60,                  -- Quest level
+        [17] = 3524,               -- Zone (Azuremyst Isle)
+        [8] = {
+            "This quest requires completing any 6 quests in Azuremyst Isle. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Azuremyst Isle"
+        },
     },
 }
 
