@@ -382,16 +382,50 @@ function _QuestEventHandler:MarkQuestAsAbandoned(questId)
     end
 
     if questEntry.state == QUEST_LOG_STATES.QUEST_REMOVED then
-        Questie:Debug(Questie.DEBUG_INFO, "Quest:", questId, "was abandoned")
-        questEntry.state = QUEST_LOG_STATES.QUEST_ABANDONED
+        -- Check if objectives were completed before the quest was removed.
+        -- This handles auto-complete quests that disappear from the log without firing QUEST_TURNED_IN properly.
+        -- If objectives were complete, treat it as a completion (not abandonment) so objective pins get hidden.
+        local objectivesWereComplete = false
+        local quest = QuestieDB.GetQuest(questId)
+        if quest then
+            local isComplete = QuestieDB.IsComplete(questId)
+            objectivesWereComplete = (isComplete == 1)
 
-        QuestLogCache.RemoveQuest(questId)
-        QuestieQuest:SetObjectivesDirty(questId) -- is this necessary? should whole quest.Objectives be cleared at some point of quest removal?
+            -- Check for Ebonhold auto-complete quests which might be removed before IsComplete returns 1
+            local desc = quest.Description
+            if type(desc) == "table" then desc = desc[1] end
 
-        QuestieQuest:AbandonedQuest(questId)
-        QuestieJourney:AbandonQuest(questId)
-        QuestieAnnounce:AbandonedQuest(questId)
-        questLog[questId] = nil
+            if (not objectivesWereComplete) and desc and type(desc) == "string" then
+                if string.find(desc, "automatically rewarded") then
+                     Questie:Debug(Questie.DEBUG_INFO, "Quest:", questId, "detected as auto-complete by description")
+                     objectivesWereComplete = true
+                end
+            end
+        end
+
+        if objectivesWereComplete then
+            -- Objectives were complete, so this was likely an auto-complete quest.
+            -- Mark as complete instead of abandoned so objective pins get hidden.
+            Questie:Debug(Questie.DEBUG_INFO, "Quest:", questId, "objectives were complete - treating as completed (auto-complete quest)")
+            questEntry.state = QUEST_LOG_STATES.QUEST_TURNED_IN
+
+            QuestLogCache.RemoveQuest(questId)
+            QuestieQuest:CompleteQuest(questId)
+            QuestieJourney:CompleteQuest(questId)
+            QuestieAnnounce:CompletedQuest(questId)
+            questLog[questId] = nil
+        else
+            Questie:Debug(Questie.DEBUG_INFO, "Quest:", questId, "was abandoned")
+            questEntry.state = QUEST_LOG_STATES.QUEST_ABANDONED
+
+            QuestLogCache.RemoveQuest(questId)
+            QuestieQuest:SetObjectivesDirty(questId) -- is this necessary? should whole quest.Objectives be cleared at some point of quest removal?
+
+            QuestieQuest:AbandonedQuest(questId)
+            QuestieJourney:AbandonQuest(questId)
+            QuestieAnnounce:AbandonedQuest(questId)
+            questLog[questId] = nil
+        end
     end
 end
 

@@ -44,6 +44,25 @@ end
 -- Apply Ascension custom uiMapId->areaId mappings into ZoneDB (used by map/Journey)
 function AscensionLoader:ApplyZoneTables()
     if _zonesApplied then return end
+    
+    -- Skip if not on Ascension server (check if we should even be here)
+    if _G.IsAscensionServer == nil and (not Questie or not Questie.db or not Questie.db.profile or not Questie.db.profile.ascensionMode) then
+        -- Check if there's actual Ascension data - if quest IDs >= 100000, it's likely Ascension
+        local hasAscensionQuests = false
+        if AscensionDB and AscensionDB.questData then
+            for questId, _ in pairs(AscensionDB.questData or {}) do
+                if type(questId) == "number" and questId >= 100000 then
+                    hasAscensionQuests = true
+                    break
+                end
+            end
+        end
+        if not hasAscensionQuests then
+            _zonesApplied = true -- Mark as done to prevent rechecking
+            return
+        end
+    end
+    
     if not AscensionZoneTables or not AscensionZoneTables.uiMapIdToAreaId then return end
 
     local ZoneDB = QuestieLoader:ImportModule("ZoneDB")
@@ -104,6 +123,51 @@ end
 -- Inject Ascension tables into QuestieDB *Overrides* so QueryQuestSingle/QueryNPCSingle can see them
 function AscensionLoader:InjectOverrides()
     if _overridesInjected then return end
+    
+    -- Ascension data should only load on Ascension servers
+    -- Check if this is an Ascension server by looking for a global or profile setting
+    local isAscension = false
+    
+    -- Method 1: Check for Ascension-specific global (servers may set this)
+    if _G.IsAscensionServer then
+        isAscension = true
+    end
+    
+    -- Method 2: Check profile setting
+    if Questie and Questie.db and Questie.db.profile and Questie.db.profile.ascensionMode then
+        isAscension = true
+    end
+    
+    -- Method 3: Check if there's actually Ascension quest data loaded
+    -- (this is a fallback - if AscensionDB has real data, use it)
+    if not isAscension and AscensionDB and AscensionDB.questData then
+        local questDataType = type(AscensionDB.questData)
+        -- If it's a table with entries, it's likely real Ascension data
+        if questDataType == "table" then
+            local hasData = false
+            for _ in pairs(AscensionDB.questData) do
+                hasData = true
+                break
+            end
+            if hasData then
+                -- Only use Ascension data if quest ID ranges suggest it's not standard WoW
+                -- Standard WoW quest IDs are typically < 100000
+                for questId, _ in pairs(AscensionDB.questData) do
+                    if type(questId) == "number" and questId >= 100000 then
+                        isAscension = true
+                        break
+                    end
+                end
+            end
+        end
+    end
+    
+    if not isAscension then
+        -- Not an Ascension server, skip loading Ascension data
+        _overridesInjected = true -- Mark as done to prevent rechecking
+        return
+    end
+
     _overridesInjected = true
 
     -- Apply zone tables FIRST, before any ZoneDB functions use the local variables

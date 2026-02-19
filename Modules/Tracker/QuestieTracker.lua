@@ -2275,24 +2275,10 @@ function QuestieTracker.RemoveQuestWatch(index, isQuestie)
             end
 
             if questId then
-                -- Check if quest is complete - if so, don't untrack it so the finisher can still be shown
-                local quest = QuestieDB.GetQuest(questId)
-                local isComplete = quest and QuestieDB.IsComplete(questId)
-
-                -- If quest is complete but has a finisher, keep it tracked so arrow can show turn-in location
-                if isComplete == 1 and quest and quest.Finisher then
-                    Questie:Debug(Questie.DEBUG_DEVELOP,
-                        "[QuestieTracker.RemoveQuestWatch] - Quest complete with finisher, keeping tracked:", questId)
-                    -- Still update tracker but don't untrack
-                    QuestieCombatQueue:Queue(function()
-                        QuestieTracker:Update()
-                    end)
-                    return
-                end
-
                 QuestieTracker:UntrackQuestId(questId)
                 Questie:Debug(Questie.DEBUG_DEVELOP, "[QuestieTracker.RemoveQuestWatch] - by Blizzard", questId)
             end
+
         end
     else
         Questie:Debug(Questie.DEBUG_DEVELOP, "[QuestieTracker.RemoveQuestWatch] - by Questie")
@@ -2301,11 +2287,10 @@ end
 
 function QuestieTracker:UntrackQuestId(questId)
     Questie:Debug(Questie.DEBUG_DEVELOP, "[QuestieTracker:UntrackQuestId] - ", questId)
-    if not Questie.db.profile.autoTrackQuests then
-        Questie.db.char.TrackedQuests[questId] = nil
-    else
-        Questie.db.char.AutoUntrackedQuests[questId] = true
-    end
+    -- Always remove from tracked quests when manually untracking
+    Questie.db.char.TrackedQuests[questId] = nil
+    -- Also remove from auto-untracked so it doesn't get re-tracked
+    Questie.db.char.AutoUntrackedQuests[questId] = nil
 
     if Questie.db.profile.hideUntrackedQuestsMapIcons then
         -- Hides objective icons for untracked quests.

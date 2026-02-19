@@ -398,14 +398,6 @@ function QuestieArrow:UpdateNearestTargets()
     local usingAutoLogic = Questie.db.profile.autoTrackQuests or not hasTracked
     local playerZoneId = QuestiePlayer:GetCurrentZoneId()
 
-    -- Auto mode logic: If autoTrack is on OR NOTHING is tracked
-    local usingAutoLogic = Questie.db.profile.autoTrackQuests or not hasTracked
-    local playerZoneId = QuestiePlayer:GetCurrentZoneId()
-
-    -- Auto mode logic: If autoTrack is on OR NOTHING is tracked
-    local usingAutoLogic = Questie.db.profile.autoTrackQuests or not hasTracked
-    local playerZoneId = QuestiePlayer:GetCurrentZoneId()
-
     local function _CollectQuestTargets(quest)
         if not quest then
             return
@@ -771,4 +763,32 @@ function QuestieArrow:Initialize()
     end
 
     QuestieArrow:Refresh()
+end
+
+-- Debug function to show current arrow target coordinates
+function QuestieArrow:PrintTargetCoords()
+    if not sortedTargets or not sortedTargets[1] then
+        print("Questie Arrow: No target currently set!")
+        return
+    end
+    local target = sortedTargets[1]
+    print("Questie Arrow Target:")
+    print("  Quest: " .. tostring(target.title))
+    print("  Level: " .. tostring(target.questLevel))
+    print("  Zone Coords: " .. string.format("%.1f, %.1f", target.x, target.y))
+    print("  UI Map ID: " .. tostring(target.uiMapId))
+    print("  Distance: " .. string.format("%.0f", target.distance))
+end
+
+-- Also expose sortedTargets for external access
+function QuestieArrow:GetTargets()
+    return sortedTargets
+end
+
+-- Hook into Refresh to show debug info when arrow updates
+local _OriginalRefresh = QuestieArrow.Refresh
+QuestieArrow.Refresh = function(self, ...)
+    _OriginalRefresh(self, ...)
+    -- You can uncomment the line below to see debug output every refresh:
+    -- QuestieArrow:PrintTargetCoords()
 end

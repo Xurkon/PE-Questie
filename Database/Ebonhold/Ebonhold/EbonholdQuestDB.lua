@@ -568,6 +568,263 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "Complete 6 quests in Azuremyst Isle"
         },
     },
+
+    -- Quest 50094: Wild Basin
+    -- Kill 75 beasts in Sholazar Basin
+    [50094] = {
+        [1] = "Wild Basin", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 68,                  -- Required level (Min level)
+        [5] = 73,                  -- Quest level
+        [17] = 3711,               -- Zone (Sholazar Basin)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill Beasts in Sholazar Basin"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- All 29 beast NPCs in Sholazar Basin (hostile to both factions)
+                    { 32485, 28009, 32481, 28097, 28083, 28001, 28213, 28297, 28358, 28317, 28096, 28325, 28288, 28399, 29044, 28086, 28011, 28085, 28380, 28847, 29033, 28010, 28002, 29034, 28129, 28004, 28087, 29018, 28003 },
+                    28001, -- RootId: Dreadsaber (representative beast)
+                    "Beasts slain"
+                }
+            }
+        },
+
+        [30] = 75, -- Kill count (75 beasts as per quest name)
+    },
+
+    -- Quest 50202: Grizzly Trophy
+    -- Kill 1 rare in Grizzly Hills
+    [50202] = {
+        [1] = "Grizzly Trophy",   -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 74,                  -- Quest level
+        [5] = 71,                  -- Min level
+        [17] = 394,                -- Zone (Grizzly Hills)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 1 Rare in Grizzly Hills"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 4 rare NPCs in Grizzly Hills
+                    { 38453, 32429, 32422, 32438 }, -- Arcturis, Seething Hate, Grocklar, Syreian the Bonecarver
+                    38453,                             -- RootId: Arcturis (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (only 1 rare needed)
+    },
+
+    -- Quest 50203: Zul'Drak Trophy
+    -- Kill 1 rare in Zul'Drak
+    [50203] = {
+        [1] = "Zul'Drak Trophy", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 77,                  -- Quest level
+        [5] = 74,                  -- Min level
+        [17] = 66,                 -- Zone (Zul'Drak)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 1 Rare in Zul'Drak"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 4 rare NPCs in Zul'Drak
+                    { 33776, 32471, 32475, 32447 }, -- Gondria, Griegen, Terror Spinner, Zul'drak Sentinel
+                    33776,                             -- RootId: Gondria (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (only 1 rare needed)
+    },
+
+    -- Quest 50149: Basin Expeditions
+    -- Complete 6 quests in Sholazar Basin (Any Quest)
+    [50149] = {
+        [1] = "Basin Expeditions", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 76,                  -- Quest level
+        [5] = 74,                  -- Min level
+        [17] = 3711,                 -- Zone (Sholazar Basin)
+        [8] = {
+            "This quest requires completing any 6 quests in Sholazar Basin. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Complete 6 quests in Sholazar Basin"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            nil  -- [5] killCreditObjective
+        },
+        [12] = { { 50149, "Complete 6 quests in Sholazar Basin" } }, -- Special objective
+    },
+
+    -- Quest 50099: Shadow of Teldrassil
+    -- Complete 6 quests in Teldrassil (Any Quest)
+    [50099] = {
+        [1] = "Shadow of Teldrassil", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 1,                   -- Min level
+        [5] = 60,                  -- Quest level
+        [17] = 141,                -- Zone (Teldrassil)
+        [8] = {
+            "This quest requires completing any 6 quests in Teldrassil. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Teldrassil"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            nil  -- [5] killCreditObjective
+        },
+        [12] = { { 50099, "Complete 6 quests in Teldrassil" } }, -- Special objective
+    },
+
+    -- Quest 50108: Trials of Durotar
+    -- Complete 6 quests in Durotar (Any Quest)
+    [50108] = {
+        [1] = "Trials of Durotar", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 1,                   -- Min level
+        [5] = 60,                  -- Quest level
+        [17] = 14,                 -- Zone (Durotar)
+        [8] = {
+            "This quest requires completing any 6 quests in Durotar. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Durotar"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            nil  -- [5] killCreditObjective
+        },
+        [12] = { { 50108, "Complete 6 quests in Durotar" } }, -- Special objective
+    },
+
+    -- Quest 50111: Song of the Woods
+    -- Complete 6 quests in Eversong Woods (Any Quest)
+    [50111] = {
+        [1] = "Song of the Woods", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 1,                   -- Min level
+        [5] = 60,                  -- Quest level
+        [17] = 3430,               -- Zone (Eversong Woods)
+        [8] = {
+            "This quest requires completing any 6 quests in Eversong Woods. The quest will automatically complete once the objective is met.",
+            "Complete 6 quests in Eversong Woods"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            nil  -- [5] killCreditObjective
+        },
+        [12] = { { 50111, "Complete 6 quests in Eversong Woods" } }, -- Special objective
+    },
+
+    -- Quest 50153: Morogh Trophy
+    -- Kill 1 rare in Dun Morogh
+    [50153] = {
+        [1] = "Morogh Trophy",     -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 10,                  -- Quest level
+        [5] = 1,                   -- Min level
+        [17] = 1,                  -- Zone (Dun Morogh)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 1 Rare in Dun Morogh"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 6 rare NPCs in Dun Morogh
+                    { 1132, 1130, 8503, 1260, 1137, 1119 }, -- Timber, Bjarn, Gibblewilt, Great Father Arctikus, Edan the Howler, Hammerspine
+                    1132,                                   -- RootId: Timber (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (only 1 rare needed)
+    },
+
+    -- Quest 50164: Tirisfal Trophy
+    -- Kill 1 rare in Tirisfal Glades
+    [50164] = {
+        [1] = "Tirisfal Trophy",   -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 10,                  -- Quest level
+        [5] = 1,                   -- Min level
+        [17] = 85,                 -- Zone (Tirisfal Glades)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 1 Rare in Tirisfal Glades"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 9 rare NPCs in Tirisfal Glades
+                    { 10357, 10359, 10356, 1936, 1531, 1911, 1910, 10358, 1533 }, -- Ressan the Needler, Sri'skulk, Bayne, Farmer Solliden, Lost Soul, Deeb, Muad, Fellicent's Shade, Tormented Spirit
+                    10357,                                                        -- RootId: Ressan the Needler (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (only 1 rare needed)
+    },
+    [50150] = {
+        [1] = "Storm Peak Orders",
+        [2] = { nil, { 600600 } },
+        [4] = 80,
+        [5] = 77,
+        [17] = 67,
+        [8] = {
+            "Complete any 6 quests in The Storm Peaks.",
+            "Complete 6 Quests"
+        },
+        [10] = {
+            nil, nil, nil, nil, nil
+        },
+    },
+
+
+
+
+
 }
 
 -- Backward compatibility

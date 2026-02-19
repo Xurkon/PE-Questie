@@ -595,6 +595,17 @@ function QuestieQuest:AbandonedQuest(questId)
 
     AvailableQuests.CalculateAndDrawAll()
 
+    -- Delayed verification to ensure all objective icons are removed
+    -- This handles race conditions where QuestieQuest:UpdateQuest might redraw icons
+    -- just as we are abandoning the quest
+    C_Timer.After(0.5, function()
+        if QuestieMap.questIdFrames[questId] then
+            Questie:Debug(Questie.DEBUG_INFO, "[QuestieQuest:AbandonedQuest] Lingering frames detected for quest:",
+                questId, "- forcing cleanup")
+            QuestieMap:UnloadQuestFrames(questId)
+        end
+    end)
+
     Questie:Debug(Questie.DEBUG_INFO, "[QuestieQuest] Abandoned Quest:", questId)
 end
 
@@ -607,7 +618,7 @@ function QuestieQuest:UpdateQuest(questId)
 
     local sourceItemId = (quest and tonumber(quest.sourceItemId)) or 0
 
-    if quest and (not Questie.db.char.complete[questId]) then
+    if quest and (not Questie.db.char.complete[questId] or QuestiePlayer.currentQuestlog[questId]) then
         QuestieQuest:PopulateQuestLogInfo(quest)
 
         if QuestieQuest:ShouldShowQuestNotes(questId) then
