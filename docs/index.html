@@ -153,8 +153,13 @@
         }
 
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.2rem; }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
@@ -162,10 +167,14 @@
 <body>
     <div class="hero">
         <h1>Questie (3.3.5a)</h1>
-        <p class="subtitle">Developer documentation for Project Ascension & Project Ebonhold compatibility layers and core engine refinements.</p>
+        <p class="subtitle">Developer documentation for Project Ascension & Project Ebonhold compatibility layers and
+            core engine refinements.</p>
         <div style="display: flex; justify-content: center; gap: 10px;">
             <code>Version: v9.7.5</code>
             <code>Branch: feature/ebonhold-compat</code>
+            <a href="changelog.html"
+                style="background: var(--bg-tertiary); color: var(--accent-green); text-decoration: none; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; border: 1px solid var(--border-color);">View
+                Changelog</a>
         </div>
     </div>
 
@@ -173,7 +182,9 @@
         <!-- Database Architecture -->
         <section id="database">
             <h2>Ebonhold Database Architecture</h2>
-            <p>To support custom servers without polluting the base WotLK database, Questie now implements a modular override system. This allows custom quests, NPCs, and objects to be defined in a safe namespace that persists across upstream updates.</p>
+            <p>To support custom servers without polluting the base WotLK database, Questie now implements a modular
+                override system. This allows custom quests, NPCs, and objects to be defined in a safe namespace that
+                persists across upstream updates.</p>
 
             <h3>1. Directory Structure</h3>
             <pre><code>Database/Ebonhold/
@@ -185,7 +196,9 @@
     └── EbonholdNpcDB.lua    # Custom NPC spawn overrides</code></pre>
 
             <h3>2. Injection Methodology</h3>
-            <p>The system hooks into <code>QuestieDB:Initialize()</code>. Instead of modifying <code>QuestieDB.questData</code> directly, it populates the override tables which are checked during quest retrieval.</p>
+            <p>The system hooks into <code>QuestieDB:Initialize()</code>. Instead of modifying
+                <code>QuestieDB.questData</code> directly, it populates the override tables which are checked during
+                quest retrieval.</p>
             <pre><code>-- EbonholdLoader.lua snippet
 local function InjectOverrides()
     for id, data in pairs(EbonholdDB.questData) do
@@ -197,33 +210,43 @@ end</code></pre>
         <!-- Logic Refinements -->
         <section id="logic-refinements">
             <h2>Core Logic Refinements</h2>
-            
+
             <div class="grid">
                 <div class="card">
                     <h4>Quest Arrow: Auto-Mode</h4>
-                    <p>Restored "Auto Nearby" logic which points to the closest available quest when the player has no active tracking list. Features <strong>Zone Filtering</strong> to prevent the arrow from pointing to distant continents when in auto-mode.</p>
+                    <p>Restored "Auto Nearby" logic which points to the closest available quest when the player has no
+                        active tracking list. Features <strong>Zone Filtering</strong> to prevent the arrow from
+                        pointing to distant continents when in auto-mode.</p>
                 </div>
                 <div class="card">
                     <h4>Tracker Robustness</h4>
-                    <p>The tracker update loop is now protected with <code>pcall</code>. This prevents malformed quest data (like the "Fel Orc Scavengers" bug) from crashing the entire UI and hiding unrelated quests.</p>
+                    <p>The tracker update loop is now protected with <code>pcall</code>. This prevents malformed quest
+                        data (like the "Fel Orc Scavengers" bug) from crashing the entire UI and hiding unrelated
+                        quests.</p>
                 </div>
             </div>
 
             <h3>Quest Icon Persistence Fix</h3>
-            <p>Custom server quests often use auto-complete triggers which can bypass Questie's standard cleanup events. We implemented a two-tier cleanup strategy:</p>
+            <p>Custom server quests often use auto-complete triggers which can bypass Questie's standard cleanup events.
+                We implemented a two-tier cleanup strategy:</p>
             <ul>
-                <li><strong>Delayed Verification</strong>: A 500ms check after <code>QuestComplete</code> to catch lingering frames.</li>
-                <li><strong>Periodic Cleanup</strong>: A 5-second background timer in <code>AvailableQuests.lua</code> that audits the map for icons belonging to finished quests.</li>
+                <li><strong>Delayed Verification</strong>: A 500ms check after <code>QuestComplete</code> to catch
+                    lingering frames.</li>
+                <li><strong>Periodic Cleanup</strong>: A 5-second background timer in <code>AvailableQuests.lua</code>
+                    that audits the map for icons belonging to finished quests.</li>
             </ul>
         </section>
 
         <!-- Custom Quest Implementation -->
         <section id="custom-quests">
             <h2>Custom Quest Implementation</h2>
-            <p>For large-scale "kill count" quests (e.g., 75 Dragonkin), we utilize the <code>killCreditObjective</code> pattern. This allows a single quest objective to be mapped to a dynamic list of NPC IDs.</p>
+            <p>For large-scale "kill count" quests (e.g., 75 Dragonkin), we utilize the <code>killCreditObjective</code>
+                pattern. This allows a single quest objective to be mapped to a dynamic list of NPC IDs.</p>
 
             <div class="important">
-                <strong>Developer Note:</strong> Using <code>killCreditObjective</code> (Index [10][5]) ensures that all participating NPC spawns appear on the map, but only <strong>one</strong> counter appears in the tracker.
+                <strong>Developer Note:</strong> Using <code>killCreditObjective</code> (Index [10][5]) ensures that all
+                participating NPC spawns appear on the map, but only <strong>one</strong> counter appears in the
+                tracker.
             </div>
 
             <pre><code>-- Example implementation (EbonholdQuestDB.lua)
@@ -246,7 +269,8 @@ end</code></pre>
         <!-- Automated Text Retrieval -->
         <section id="automated-learning">
             <h2>Automated Learning (Self-Learning)</h2>
-            <p>When Questie encounters a Quest ID that exists in the player's log but is missing from the local database, it triggers a <strong>Runtime Learning event</strong>.</p>
+            <p>When Questie encounters a Quest ID that exists in the player's log but is missing from the local
+                database, it triggers a <strong>Runtime Learning event</strong>.</p>
             <ol>
                 <li>Scans <code>GetQuestLogTitle(index)</code> for the missing ID.</li>
                 <li>Calls <code>QuestieLearner:OnQuestAccepted</code> to populate overrides.</li>

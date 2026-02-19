@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questie (3.3.5a) - Developer Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-green: #3fb950;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --border-color: #30363d;
+            --code-bg: #1b1f23;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1c2128 0%, #0d1117 100%);
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        section {
+            margin-bottom: 80px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--accent-blue);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 30px 0 15px;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e6edf3;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card h4 {
+            color: var(--accent-green);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .important {
+            background: rgba(210, 153, 34, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .file-path {
+            color: var(--accent-purple);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Questie Changelog</h1>
+        <p class="subtitle">Complete history of changes, fixes, and additions.</p>
+        <div style="display: flex; justify-content: center; gap: 10px;">
+            <a href="index.html" style="color: var(--accent-blue); text-decoration: none; border: 1px solid var(--border-color); padding: 5px 10px; border-radius: 4px;">&larr; Back to Documentation</a>
+        </div>
+    </div>
+
+    <div class="container">
+<h2 id="v975">v9.7.5</h2>
+<h3>Fixes</h3>
+<ul>
+    <li><strong>[Quest]</strong> Fixed an issue where re-accepted quests (e.g., repeatable custom quests) would not show objective pins/icons on the map.</li>
+</ul>
+<h3>New Quests</h3>
+<ul>
+    <li><strong>[Database]</strong> Added <strong>Storm Peak Orders</strong> (ID 50150) - <em>The Storm Peaks</em></li>
+    <ul><li>Objective: Complete any 6 quests in The Storm Peaks.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Wild Basin</strong> (ID 50094) - <em>Sholazar Basin</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 29 Beast NPC types with full spawn coordinates.</li></ul>
+    <ul><li>NPCs: King Krush, Shardhorn Rhino, Aotona, Pitch, Serfex the Reaver, Dreadsaber, Hardknuckle Matriarch, Shango, Venomtip, Bushwhacker, Hardknuckle Charger, Ravenous Mangal Crocolisk, Farunn, Zeptek the Destroyer, Goretalon Matriarch, Sapphire Hive Wasp, Emperor Cobra, Sapphire Hive Drone, Shattertusk Bull, Siltslither Eel, Spirit of Atha, Stranded Thresher, Mangal Crocolisk, Spirit of Koosu, Longneck Grazer, Goretalon Roc, Sapphire Hive Queen, Spirit of Ha-Khalan, Bittertide Hydra</li></ul>
+</ul>
+<h2 id="v974">v9.7.4</h2>
+<h3>Fixes</h3>
+<ul>
+    <li><strong>[Tooltips]</strong> Fixed "attempt to concatenate local 'name' (a nil value)" error when quest starters/finishers have missing names in the database.</li>
+    <li><strong>[Database]</strong> Added missing spawn coordinates for Quest 50031 "Stormbound" elementals in Storm Peaks (zone 67).</li>
+    <li><strong>[Database]</strong> Fixed "Unknown Zone" issue for custom quests by correcting Zone ID index usage (swapped `[6]` RequiredRaces for `[17]` ZoneID).</li>
+    <li><strong>[Database]</strong> Corrected Dragonblight Zone ID in custom quest definitions.</li>
+</ul>
+<h3>New Quests</h3>
+<ul>
+    <li><strong>[Database]</strong> Added <strong>Morogh Missions</strong> (ID 50098) - <em>Dun Morogh</em></li>
+    <ul><li>Objective: Complete any 6 quests in Dun Morogh. Auto-completes upon reaching the objective.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Azuremyst Aid</strong> (ID 50100) - <em>Azuremyst Isle</em></li>
+    <ul><li>Objective: Complete any 6 quests in Azuremyst Isle. Auto-completes upon reaching the objective.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Stormforged Scales</strong> (ID 50066) - <em>The Storm Peaks</em></li>
+    <ul><li>Objective: Kill 30 Dragonkin. Includes 8 Dragonkin NPC types with full spawn coordinates.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Peak Predators</strong> (ID 50095) - <em>The Storm Peaks</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 24 Beast NPC types with full spawn coordinates.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Peak Predators</strong> (ID 50096) - <em>Icecrown</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 12 Beast NPC types with full spawn coordinates.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Icecrown Advance</strong> (ID 50151) - <em>Icecrown</em></li>
+    <ul><li>Objective: Complete any 6 quests in Icecrown. Auto-completes upon reaching the objective.</li></ul>
+    <li><strong>[Database]</strong> Added <strong>Storm Peaks Trophy</strong> (ID 50205) - <em>The Storm Peaks</em></li>
+    <ul><li>Objective: Kill 1 Rare in The Storm Peaks. Includes 4 Rare NPC types (Skoll, Time-Lost Proto-Drake, Vyragosa, Dirkee) with full spawn coordinates.</li></ul>
+</ul>
+<h2 id="v973">v9.7.3</h2>
+<h3>New Features</h3>
+<ul>
+    <li><strong>[Database]</strong> Implemented <strong>Ebonhold Database Module</strong>.</li>
+    <ul><li>Created dedicated `Database/Ebonhold/` structure for custom server data.</li></ul>
+    <ul><li>Added `EbonholdLoader` to inject custom Quests, NPCs, Objects, and Items as overrides.</li></ul>
+    <ul><li>**Note:** This structure preserves custom data during upstream Questie updates.</li></ul>
+    <li><strong>[Objectives]</strong> Implemented <strong>Automated Text Retrieval</strong>.</li>
+    <ul><li>Questie now attempts to fetch quest text from the server at runtime for custom quests that are missing from the database.</li></ul>
+    <ul><li>Added "Objectives Board" (ID 600600) as a global quest starter.</li></ul>
+</ul>
+<h3>Quests (Custom Content)</h3>
+<ul>
+    <li><strong>[New]</strong> Added <strong>Heart of the Dragonflights</strong> (ID 50064) - <em>Dragonblight</em></li>
+    <ul><li>Objective: Kill 30 Dragonkin. Includes 49 Dragonkin NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Skies of Blade's Edge</strong> (ID 50060) - <em>Blade's Edge Mountains</em></li>
+    <ul><li>Objective: Kill 75 Dragonkin. Includes 17 Dragonkin NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Shadowed Beasts</strong> (ID 50087) - <em>Shadowmoon Valley</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 25 Beast NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Forest Stalkers</strong> (ID 50083) - <em>Terokkar Forest</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 53 Beast NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Savage Heights</strong> (ID 50085) - <em>Blade's Edge Mountains</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 47 Beast NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Unstable Fauna</strong> (ID 50086) - <em>Netherstorm</em></li>
+    <ul><li>Objective: Kill 75 Beasts. Includes 18 Beast NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Elemental Balance</strong> (ID 50026) - <em>Nagrand</em></li>
+    <ul><li>Objective: Kill 30 Elementals. Includes 12 Elemental NPC types.</li></ul>
+    <li><strong>[New]</strong> Added <strong>Redridge Trophy</strong> (ID 50160) and <strong>Zangarmarsh Trophy</strong> (ID 50192).</li>
+</ul>
+<h3>New Ascension Quests</h3>
+<ul>
+    <li><strong>Westfall</strong>: Agria's Medicine, Seven Years of Bad Luck, Worm-Eaten Apple, Goldshire's Generosity, Bookworm, Knowledge Corrupts, The Ruins of Northshire, Accursed Sisterhood, Words That Shepherd Madness, Oracular Idol, A Betrayal Within, The Maid I Left Behind, The Saddest Among Us, The Threat Swept Downstream, Stay a While, Defias Disruption.</li>
+    <li><strong>Dun Morogh</strong>: A Small Mistake, We Found Her!, The Scout's Favor, Old Mirsinth, Smoke on the Wind, A Promising Path, A Fitting Disguise, His Radiant Majesty, Deciphering Radiation, Soaking the Masses, Sever the Right Hand, A Growing Business, Thunderbrew's Hop, Stay a While, Live-Fire Demo, Bots on Strike, A Brother's Betrayal, The True Story, Timber for the Coldhewn, Icehide the Unbroken.</li>
+    <li><strong>Teldrassil</strong>: The Carrion Road, The Sister Who Never Returned, Finding the Good Meat, Transsubstantiating the Flesh, Communion Banquet, A Trail of Petals, Restless entrails, A Dark Warning, The Aid of Theren-Dion, No Place for Scavengers, Termites in Teldrassil, Stay a While, Elydna's Heirloom.</li>
+    <li><strong>Durotar</strong>: To Find a Cure, A Dangerous Sample, Knowledge of the Centaurs, Those Who Fell, The Way is Shut, The Sinister Triad, So That He May Hear Again, A Sinister Ritual, Innocents for Sinners, Unease Makes Tongues Wag, A Door Left Ajar, Esgramor's Master, Shinies!, Echoes of Hirsutta, Auction the Past, Stay a While, Durotar's Dire Drought, The Queen's Decree, Avianna's Rose, The Last Piece, Reversion.</li>
+    <li><strong>Tirisfal Glades</strong>: Rude Awakening, Marla's Last Wish, Monsters With Noble Intentions, Restless Family Members, An Unspeakable Secret, A Noble Heritage, The True Heir of the Cains, The Friends We Make Along the Way, I'm Home, Apothecary Flemer, The Nature of Freedom, Spotless Standing, Stay a While, More Than the Sum of its Parts, Scarlet Correspondence, A Humble Duty, The Balnirs' Rest, Brewing Disarray, This Is Justice.</li>
+    <li><strong>Mulgore</strong>: Death and Tribute, Death and Exile, Death and Dishonor, Death and Justice, Death by Laughter, To Whom I Devote, Fighting Over Carrion, Smoke on the Horizon, Amphora of Sacred Water, Stay a While, Exile of Embers, The Smoke that Remembers, The Circle’s Rite.</li>
+</ul>
+<h3>New Ebonhold Quests</h3>
+<ul>
+    <li><strong>Outland</strong>: Elemental Balance, Savage Heights, Unstable Fauna, Forest Stalkers, Marsh Predators, Skies of Blade's Edge, Shadowed Beasts, Zangarmarsh Trophy.</li>
+    <li><strong>Northrend</strong>: Tundra Turbulence, Stormbound, Dragonblight Trophy, Heart of the Dragonflights, Peak Predators, Icecrown Advance, Storm Peaks Trophy, Stormforged Scales, Fjord Front, Wild Basin, Grizzly Trophy, Zul'Drak Trophy, Basin Expeditions.</li>
+    <li><strong>Azeroth</strong>: Redridge Trophy, Morogh Missions, Azuremyst Aid, Shadow of Teldrassil, Trials of Durotar, Song of the Woods, Morogh Trophy, Tirisfal Trophy.</li>
+</ul>
+<h3>Fixes</h3>
+<ul>
+    <li><strong>[Tracker]</strong> <strong>Combat Update Fix</strong>: Tracker now updates objectives immediately during combat without causing Lua errors or taint.</li>
+    <li><strong>[Tracker]</strong> <strong>Bag Update Fix</strong>: Quest progress now updates immediately when looting items (fixes delay with loot bots).</li>
+    <li><strong>[Arrow]</strong> <strong>Refined Visibility Logic</strong>:</li>
+    <ul><li>**Auto Nearby**: Arrow correctly defaults to showing the nearest quest when no quests are tracked.</li></ul>
+    <ul><li>**Zone Filter**: In "Auto Mode", the arrow hides if the nearest quest is in a different zone.</li></ul>
+    <ul><li>**Instance Filter**: Arrow explicitly hides if the target is in a different instance.</li></ul>
+    <li><strong>[Map]</strong> Fixed an issue where completed quest icons would persist on the map (`RequestMapUpdate` logic).</li>
+    <li><strong>[Database]</strong> Updated `wotlkNpcDB.lua` with scraped spawn data for 12 key beast NPCs in Terokkar Forest to ensure accuracy.</li>
+    <li><strong>[Arrow]</strong> Fixed a nil function error for `_CollectObjective` when processing incomplete quests.</li>
+    <li><strong>[Arrow]</strong> Fixed syntax issues that prevented `QuestieArrow` module from initializing correctly.</li>
+    <li><strong>[Database]</strong> Fixed a runtime crash in `ZoneDB` when encountering maps with no AreaId mapping (e.g., Kalimdor).</li>
+</ul>
+
+    </div>
+
+    <footer>
+        <p>Maintained by Xurkon &bull; Part of the Project Ebonhold Addon Suite</p>
+    </footer>
+</body>
+</html>
