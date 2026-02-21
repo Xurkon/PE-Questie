@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.7.7
+
+### Fixes
+- **[Quest]** Fixed "Missing event data for Objective" error appearing in chat for all `triggerEnd` quests with no map coordinates (e.g., "complete N quests in zone" types). Nil coordinates are valid for server-tracked objectives with no pin — the handler now returns silently instead of logging a visible error.
+
 ## v9.7.6
 
 ### Fixes

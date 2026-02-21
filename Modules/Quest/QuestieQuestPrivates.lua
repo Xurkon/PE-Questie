@@ -170,8 +170,8 @@ end
 event = function(eventId, objective)
     local spawns = objective.Coordinates
     if (not spawns) then
-        Questie:Error("Missing event data for Objective:", objective.Description, "id:", eventId)
-        spawns = {}
+        Questie:Debug(Questie.DEBUG_DEVELOP, "No coordinates for event objective:", objective.Description, "id:", eventId)
+        return nil
     end
 
     ---@type SpawnListEvent
