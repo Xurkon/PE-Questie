@@ -1292,9 +1292,10 @@ _RegisterObjectiveTooltips = function(objective, questId, blockItemTooltips)
             objective.hasRegisteredTooltips = true
         end
     else
-        -- No spawnList is expected for server-tracked event objectives (e.g. triggerEnd with no coordinates).
-        -- Mark as registered so this path is not re-entered, and return silently.
-        if objective.Type == "event" then
+        -- No spawnList and no Id means there is nothing Questie can draw for this objective.
+        -- This covers server-tracked trigger objectives (e.g. "complete N quests in zone" for
+        -- quest 50150) which may have any objectiveType from the server, not just "event".
+        if not objective.Id then
             objective.hasRegisteredTooltips = true
             return
         end
