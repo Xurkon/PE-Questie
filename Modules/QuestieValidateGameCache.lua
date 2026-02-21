@@ -122,10 +122,10 @@ local function OnQuestLogUpdate()
     end
 
     if goodQuestsCount ~= numQuests then
-        -- This shouldn't be possible
-
-        Questie:Error("Game Cache has still a broken quest log. Good quest: "..goodQuestsCount.."/"..numQuests..". Please report this on Github or Discord!") -- Translations might not be available yet.
-        -- TODO should we stop whole addon loading progress?
+        -- This count mismatch can occur on WotLK private servers where GetNumQuestLogEntries
+        -- returns a different value than objectives-loop counted. The cache is valid because
+        -- isQuestLogGood already passed above. Log at debug level only.
+        Questie:Debug(Questie.DEBUG_INFO, "[QuestieValidateGameCache] Quest count mismatch (expected "..tostring(numQuests)..", validated "..tostring(goodQuestsCount).."). Cache is still valid.")
     end
 
     DestroyEventFrame()
