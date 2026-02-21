@@ -437,7 +437,8 @@ function QuestieArrow:UpdateNearestTargets()
         end
 
         -- If the quest is complete, track the finisher/turn-in location
-        if quest.isComplete then
+        if quest.isComplete or QuestieDB.IsComplete(quest.Id) == 1 then
+            quest.isComplete = true
             local function _GetCompleteIconType()
                 local iconType = Questie.ICON_TYPE_COMPLETE
                 if QuestieDB and QuestieDB.IsActiveEventQuest and QuestieDB.IsActiveEventQuest(quest.Id) then
