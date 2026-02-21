@@ -525,6 +525,11 @@ function QuestieQuest:CompleteQuest(questId)
     end
     QuestieMap:UnloadQuestFrames(questId)
 
+    -- Clear the pending-complete guard now that frames are unloaded
+    if QuestiePlayer.pendingCompleteQuestIds then
+        QuestiePlayer.pendingCompleteQuestIds[questId] = nil
+    end
+
     if (QuestieMap.questIdFrames[questId]) then
         Questie:Error("Just removed all frames but the framelist seems to still be there!", questId)
     end
@@ -619,6 +624,12 @@ function QuestieQuest:UpdateQuest(questId)
     local sourceItemId = (quest and tonumber(quest.sourceItemId)) or 0
 
     if quest and (not Questie.db.char.complete[questId] or QuestiePlayer.currentQuestlog[questId]) then
+        -- Skip this update if the quest is mid-completion to avoid redrawing objective pins
+        -- that CompleteQuest is about to remove via UnloadQuestFrames.
+        if QuestiePlayer.pendingCompleteQuestIds and QuestiePlayer.pendingCompleteQuestIds[questId] then
+            Questie:Debug(Questie.DEBUG_DEVELOP, "[QuestieQuest:UpdateQuest] Skipping - quest is pending completion:", questId)
+            return
+        end
         QuestieQuest:PopulateQuestLogInfo(quest)
 
         if QuestieQuest:ShouldShowQuestNotes(questId) then
@@ -1261,9 +1272,13 @@ _RegisterObjectiveTooltips = function(objective, questId, blockItemTooltips)
             objective.hasRegisteredTooltips = true
         end
     else
-        Questie:Error("[QuestieQuest]: [Tooltips] " ..
-        l10n("There was an error populating objectives for %s %s %s %s", objective.Description or "No objective text",
-            questId or "No quest id", 0 or "No objective", "No error"));
+        -- No spawnList is expected for server-tracked event objectives (e.g. triggerEnd with no coordinates).
+        -- Mark as registered so this path is not re-entered, and return silently.
+        if objective.Type == "event" then
+            objective.hasRegisteredTooltips = true
+            return
+        end
+        Questie:Debug(Questie.DEBUG_ELEVATED, "[QuestieQuest]: [Tooltips] No spawnList for objective:", objective.Description, "quest:", questId)
     end
 
     if (not objective.registeredItemTooltips) and objective.Type == "item" and (not blockItemTooltips) and objective.Id then
