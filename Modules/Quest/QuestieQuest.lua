@@ -665,7 +665,22 @@ function QuestieQuest:UpdateQuest(questId)
             -- Quest was somehow reset back to incomplete after being completed (quest.WasComplete == true).
             -- The "or" check looks for a sourceItemId then checks to see if it's NOT in the players bag.
             -- Player destroyed quest items? Or some other quest mechanic removed the needed quest item.
-            if quest and (quest.WasComplete or (sourceItemId > 0 and QuestieQuest:CheckQuestSourceItem(questId) == false)) then
+            -- Check if all objectives are already complete before treating a missing source item as a reset.
+            -- Some quests use consumable key items (e.g. Cold Iron Key for quest 12843). After using the key
+            -- the item leaves the bag, making CheckQuestSourceItem return false. Without this guard, Questie
+            -- would reset the quest and draw the key-drop NPC on the map even though all objectives are done.
+            local allObjectivesComplete = false
+            if quest.Objectives and #quest.Objectives > 0 then
+                local doneCount = 0
+                for i = 1, #quest.Objectives do
+                    if quest.Objectives[i] and quest.Objectives[i].Completed == true then
+                        doneCount = doneCount + 1
+                    end
+                end
+                allObjectivesComplete = (doneCount == #quest.Objectives)
+            end
+
+            if quest and not allObjectivesComplete and (quest.WasComplete or (sourceItemId > 0 and QuestieQuest:CheckQuestSourceItem(questId) == false)) then
                 Questie:Debug(Questie.DEBUG_DEVELOP,
                     "[QuestieQuest:UpdateQuest] Quest was once complete or Quest Item(s) were removed. Resetting quest.")
 
@@ -1278,7 +1293,9 @@ _RegisterObjectiveTooltips = function(objective, questId, blockItemTooltips)
             objective.hasRegisteredTooltips = true
             return
         end
-        Questie:Debug(Questie.DEBUG_ELEVATED, "[QuestieQuest]: [Tooltips] No spawnList for objective:", objective.Description, "quest:", questId)
+        Questie:Error("[QuestieQuest]: [Tooltips] " ..
+        l10n("There was an error populating objectives for %s %s %s %s", objective.Description or "No objective text",
+            questId or "No quest id", 0 or "No objective", "No error"))
     end
 
     if (not objective.registeredItemTooltips) and objective.Type == "item" and (not blockItemTooltips) and objective.Id then
