@@ -92,10 +92,10 @@ local function OnQuestLogUpdate()
                 local objectiveList = GetQuestObjectives(questId, i)
 
                 if type(objectiveList) ~= "table" then
-                    -- I couldn't find yet a quest returning nil like older code suggested for example for quest 2744, which isn't true.
-                    -- I guess older code queried data before HaveQuestData() was true.
-                    Questie:Error("REPORT THIS ERROR! Quest objectives aren't a table. This may stop Questie from loading. questId =", questId)
-                    hasInvalidObjective = true
+                    -- On WotLK private servers, GetQuestObjectives can return nil for quests with
+                    -- no trackable objectives. This is not a broken cache state; treat it as an
+                    -- empty (valid) objective list so goodQuestsCount increments correctly.
+                    Questie:Debug(Questie.DEBUG_DEVELOP, "[QuestieValidateGameCache] GetQuestObjectives returned non-table for questId:", questId, "- treating as empty objectives")
                     objectiveList = {}
                 end
 
