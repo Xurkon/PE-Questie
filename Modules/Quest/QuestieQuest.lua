@@ -778,7 +778,12 @@ function QuestieQuest:GetAllQuestIds()
             if complete == -1 then
                 QuestieQuest:UpdateQuest(questId)
             else
-                QuestieQuest:CheckQuestSourceItem(questId, true)
+                -- Only draw the source item objective when the quest is not yet complete.
+                -- If the quest is complete (complete == 1), the source item was consumed during
+                -- the quest (e.g. Cold Iron Key for quest 12843) and should not draw its drop NPC.
+                if complete ~= 1 then
+                    QuestieQuest:CheckQuestSourceItem(questId, true)
+                end
                 QuestieQuest:PopulateQuestLogInfo(quest)
 
                 if QuestieQuest:ShouldShowQuestNotes(questId) then
