@@ -453,15 +453,16 @@ EbonholdDB.questData = EbonholdDB.questData or {
     -- Requires completing any 6 quests in Icecrown
     -- Auto-complete, no turn-in location
     [50151] = {
-        [1] = "Icecrown Advance", -- Quest name
+        [1] = "Icecrown Advance",  -- Quest name
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
-        [4] = 73,                  -- Min level
-        [5] = 80,                  -- Quest level
+        [4] = 80,                  -- Quest level
+        [5] = 73,                  -- Min level
         [17] = 210,                -- Zone (Icecrown)
         [8] = {
             "This quest requires completing any 6 quests in Icecrown. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Icecrown"
         },
+        [9] = { "Complete 6 quests in Icecrown", nil },
     },
 
     -- Quest 50205: Storm Peaks Trophy
@@ -537,6 +538,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Howling Fjord. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Howling Fjord"
         },
+        [9] = { "Complete 6 quests in Howling Fjord", nil },
     },
 
     -- Quest 50098: Morogh Missions
@@ -552,6 +554,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Dun Morogh. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Dun Morogh"
         },
+        [9] = { "Complete 6 quests in Dun Morogh", nil },
     },
 
     -- Quest 50100: Azuremyst Aid
@@ -567,6 +570,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Azuremyst Isle. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Azuremyst Isle"
         },
+        [9] = { "Complete 6 quests in Azuremyst Isle", nil },
     },
 
     -- Quest 50094: Wild Basin
@@ -666,19 +670,12 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
         [4] = 76,                  -- Quest level
         [5] = 74,                  -- Min level
-        [17] = 3711,                 -- Zone (Sholazar Basin)
+        [17] = 3711,               -- Zone (Sholazar Basin)
         [8] = {
             "This quest requires completing any 6 quests in Sholazar Basin. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
             "Complete 6 quests in Sholazar Basin"
         },
-        [10] = {
-            nil, -- [1] creatureObjective (not used)
-            nil, -- [2] objectObjective (not used)
-            nil, -- [3] itemObjective (not used)
-            nil, -- [4] reputationObjective (not used)
-            nil  -- [5] killCreditObjective
-        },
-        [12] = { { 50149, "Complete 6 quests in Sholazar Basin" } }, -- Special objective
+        [9] = { "Complete 6 quests in Sholazar Basin", nil },
     },
 
     -- Quest 50099: Shadow of Teldrassil
@@ -693,14 +690,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Teldrassil. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Teldrassil"
         },
-        [10] = {
-            nil, -- [1] creatureObjective (not used)
-            nil, -- [2] objectObjective (not used)
-            nil, -- [3] itemObjective (not used)
-            nil, -- [4] reputationObjective (not used)
-            nil  -- [5] killCreditObjective
-        },
-        [12] = { { 50099, "Complete 6 quests in Teldrassil" } }, -- Special objective
+        [9] = { "Complete 6 quests in Teldrassil", nil },
     },
 
     -- Quest 50108: Trials of Durotar
@@ -715,14 +705,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Durotar. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Durotar"
         },
-        [10] = {
-            nil, -- [1] creatureObjective (not used)
-            nil, -- [2] objectObjective (not used)
-            nil, -- [3] itemObjective (not used)
-            nil, -- [4] reputationObjective (not used)
-            nil  -- [5] killCreditObjective
-        },
-        [12] = { { 50108, "Complete 6 quests in Durotar" } }, -- Special objective
+        [9] = { "Complete 6 quests in Durotar", nil },
     },
 
     -- Quest 50111: Song of the Woods
@@ -737,14 +720,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "This quest requires completing any 6 quests in Eversong Woods. The quest will automatically complete once the objective is met.",
             "Complete 6 quests in Eversong Woods"
         },
-        [10] = {
-            nil, -- [1] creatureObjective (not used)
-            nil, -- [2] objectObjective (not used)
-            nil, -- [3] itemObjective (not used)
-            nil, -- [4] reputationObjective (not used)
-            nil  -- [5] killCreditObjective
-        },
-        [12] = { { 50111, "Complete 6 quests in Eversong Woods" } }, -- Special objective
+        [9] = { "Complete 6 quests in Eversong Woods", nil },
     },
 
     -- Quest 50153: Morogh Trophy
@@ -816,9 +792,7 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "Complete any 6 quests in The Storm Peaks.",
             "Complete 6 Quests"
         },
-        [10] = {
-            nil, nil, nil, nil, nil
-        },
+        [9] = { "Complete 6 Quests", nil },
     },
 
 
