@@ -1078,10 +1078,30 @@ function QuestieDB.IsComplete(questId)
     if has questLogEntry.isComplete then return questLogEntry.isComplete
     if no objectives and an item is needed but not obtained then return 0
     if no objectives then return 1
+    if all objectives are finished then return 1
     return 0
     --]]
 
-    return questLogEntry and (questLogEntry.isComplete or (questLogEntry.objectives[1] and 0) or (#questLogEntry.objectives == 0 and noQuestItem and 0) or 1) or 0
+    if not questLogEntry then return 0 end
+    if questLogEntry.isComplete then return questLogEntry.isComplete end
+
+    local objectives = questLogEntry.objectives
+    if not objectives or #objectives == 0 then
+        return (noQuestItem and 0) or 1
+    end
+
+    -- Check if every objective is finished. Some quests consume their source item (e.g. Cold Iron Key)
+    -- so CheckQuestSourceItem returns false even though all objectives are done. We should not return 0
+    -- in that case because it causes Questie to draw the item-drop NPC on the map instead of the finisher.
+    local allDone = true
+    for _, obj in ipairs(objectives) do
+        if not obj.finished then
+            allDone = false
+            break
+        end
+    end
+
+    return allDone and 1 or 0
 end
 
 ---@param self Quest
