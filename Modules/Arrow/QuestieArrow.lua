@@ -600,6 +600,13 @@ function QuestieArrow:UpdateNearestTargets()
                 return
             end
 
+            -- If the objective is numerically fulfilled but the server hasn't sent the Completed flag yet
+            if objective.Needed and objective.Collected and type(objective.Needed) == "number" and type(objective.Collected) == "number" then
+                if objective.Collected >= objective.Needed then
+                    return
+                end
+            end
+
             for _, spawnData in pairs(objective.spawnList) do
                 if spawnData and spawnData.Spawns then
                     for zone, spawns in pairs(spawnData.Spawns) do
