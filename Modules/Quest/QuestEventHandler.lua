@@ -64,6 +64,7 @@ function QuestEventHandler:RegisterEvents()
     eventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
     eventFrame:RegisterEvent("NEW_RECIPE_LEARNED") -- Spell objectives; Runes in SoD count as recipes because "Engraving" is a profession?
     --eventFrame:RegisterEvent("SPELLS_CHANGED") -- Spell objectives
+    eventFrame:RegisterEvent("BAG_UPDATE_DELAYED") -- Catch quest item loots that bypass QUEST_WATCH_UPDATE (e.g. autoloot bots)
 
     eventFrame:RegisterEvent("PLAYER_INTERACTION_MANAGER_FRAME_HIDE")
 
@@ -282,6 +283,9 @@ end
 function _QuestEventHandler:QuestTurnedIn(questId, xpReward, moneyReward)
     Questie:Debug(Questie.DEBUG_DEVELOP, "[Quest Event] QUEST_TURNED_IN", xpReward, moneyReward, questId)
 
+    -- Block UpdateQuest from redrawing objective pins while completion is in-flight
+    QuestiePlayer.pendingCompleteQuestIds[questId] = true
+
     if questLog[questId] and questLog[questId].timer then
         -- Cancel the timer so the quest is not marked as abandoned
         questLog[questId].timer:Cancel()
@@ -348,12 +352,15 @@ function _QuestEventHandler:QuestRemoved(questId)
     -- QUEST_TURNED_IN was called before QUEST_REMOVED --> quest was turned in
     if questLog[questId].state == QUEST_LOG_STATES.QUEST_TURNED_IN then
         Questie:Debug(Questie.DEBUG_INFO, "Quest:", questId, "was turned in before. Completing quest.")
-        
+
+        -- Ensure the guard is set in case QUEST_REMOVED fires before the combat queue drains
+        QuestiePlayer.pendingCompleteQuestIds[questId] = true
+
         -- Now that we confirmed the quest was actually turned in (not abandoned), mark it as complete
         QuestieQuest:CompleteQuest(questId)
         QuestieJourney:CompleteQuest(questId)
         QuestieAnnounce:CompletedQuest(questId)
-        
+
         questLog[questId] = nil
         return
     end
@@ -677,6 +684,10 @@ function _QuestEventHandler:OnEvent(event, ...)
     elseif event == "NEW_RECIPE_LEARNED" then
         Questie:Debug(Questie.DEBUG_DEVELOP, "[EVENT] NEW_RECIPE_LEARNED (QuestEventHandler)")
         doFullQuestLogScan = true -- If this event is related to a spell objective, a QUEST_LOG_UPDATE will be fired afterwards
+    elseif event == "BAG_UPDATE_DELAYED" then
+        -- Autoloot bots can bypass the standard loot frame, skipping QUEST_WATCH_UPDATE for the last items looted.
+        -- Flag a full scan so the tracker refreshes on the next QUEST_LOG_UPDATE.
+        doFullQuestLogScan = true
     elseif event == "PLAYER_INTERACTION_MANAGER_FRAME_HIDE" then
         local eventType = select(1, ...)
         if eventType == 1 then

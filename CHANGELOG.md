@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.7.9
+
+### Fixes
+- **[Quest]** Fixed tracker objective count staying stale (e.g. stuck at 14/16 when quest is complete) when an autoloot bot bypasses the standard loot frame. Registered `BAG_UPDATE_DELAYED` event to force a full quest log scan on bag changes, catching progress updates that `QUEST_WATCH_UPDATE` would normally fire for manual looting.
+
 ## v9.7.8
 
 ### Fixes
