@@ -8,7 +8,8 @@
 ## v9.7.5
 
 ### Fixes
-- **[Quest]** Fixed an issue where re-accepted quests (e.g., repeatable custom quests) would not show objective pins/icons on the map.
+- **[Quest]** Fixed objective pins/icons persisting on the map after a quest is completed or abandoned. Added `CleanupRemovedQuestsFallback` which diffs Questie's quest log against the game's actual quest log on every `QUEST_LOG_UPDATE` and correctly calls `CompleteQuest` or `AbandonedQuest` for any quest that silently disappeared, ensuring map icons are removed.
+- **[Quest]** Fixed re-accepted repeatable custom quests (e.g., Stormforged Scales) not showing objective icons on the map after being accepted a second time.
 
 ### New Quests
 - **[Database]** Added **Storm Peak Orders** (ID 50150) - *The Storm Peaks*
