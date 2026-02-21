@@ -1083,7 +1083,9 @@ function QuestieDB.IsComplete(questId)
     --]]
 
     if not questLogEntry then return 0 end
-    if questLogEntry.isComplete then return questLogEntry.isComplete end
+    if questLogEntry.isComplete == 1 or questLogEntry.isComplete == -1 then
+        return questLogEntry.isComplete
+    end
 
     local objectives = questLogEntry.objectives
     if not objectives or #objectives == 0 then
