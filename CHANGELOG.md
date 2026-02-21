@@ -1,5 +1,10 @@
 # Changelog
 
+## v9.7.8
+
+### Fixes
+- **[Quest]** Fixed "There was an error populating objectives" error in chat for `triggerEnd` quests with no map coordinates (e.g., "complete N quests in zone"). `_RegisterObjectiveTooltips` now silently returns for `event`-type objectives with no `spawnList` — these have nothing to register a tooltip for.
+
 ## v9.7.7
 
 ### Fixes
