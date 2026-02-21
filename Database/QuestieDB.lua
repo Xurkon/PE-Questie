@@ -1100,9 +1100,16 @@ function QuestieDB.IsComplete(questId)
     local allDone = true
     for _, obj in ipairs(objectives) do
         if obj.numRequired and obj.numRequired > 0 and obj.numFulfilled ~= obj.numRequired then
+            if questLogEntry.questId == 12843 or questLogEntry.questId == 12844 then
+                print("QuestieDB " .. tostring(questLogEntry.title) .. " incomplete because obj " .. tostring(obj.text) .. " has " .. tostring(obj.numFulfilled) .. "/" .. tostring(obj.numRequired))
+            end
             allDone = false
             break
         end
+    end
+
+    if (questLogEntry.questId == 12843 or questLogEntry.questId == 12844) and allDone then
+         print("QuestieDB " .. tostring(questLogEntry.title) .. " thinks it is all done.")
     end
 
     return allDone and 1 or 0
