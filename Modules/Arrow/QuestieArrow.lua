@@ -436,6 +436,10 @@ function QuestieArrow:UpdateNearestTargets()
             end
         end
 
+        if quest.Id == 12843 or quest.Id == 12844 then
+            print("QuestieArrow: Evaluating " .. tostring(quest.name) .. ". quest.isComplete is " .. tostring(quest.isComplete) .. ", QuestieDB.IsComplete is " .. tostring(QuestieDB.IsComplete(quest.Id)))
+        end
+
         -- If the quest is complete, track the finisher/turn-in location
         if quest.isComplete or QuestieDB.IsComplete(quest.Id) == 1 then
             quest.isComplete = true
