@@ -1090,12 +1090,14 @@ function QuestieDB.IsComplete(questId)
         return (noQuestItem and 0) or 1
     end
 
-    -- Check if every objective is finished. Some quests consume their source item (e.g. Cold Iron Key)
-    -- so CheckQuestSourceItem returns false even though all objectives are done. We should not return 0
-    -- in that case because it causes Questie to draw the item-drop NPC on the map instead of the finisher.
+    -- Check if every objective is fulfilled. Use numFulfilled == numRequired rather than the
+    -- finished flag, because finished is only set by QuestLogCache when the server sends
+    -- isComplete=1 via GetQuestLogTitle. For quests using consumable items (e.g. Cold Iron Key
+    -- for quest 12843), the key is consumed and numFulfilled/numRequired update immediately,
+    -- but isComplete=1 may not arrive until the player physically visits the turn-in NPC.
     local allDone = true
     for _, obj in ipairs(objectives) do
-        if not obj.finished then
+        if obj.numRequired and obj.numRequired > 0 and obj.numFulfilled ~= obj.numRequired then
             allDone = false
             break
         end
