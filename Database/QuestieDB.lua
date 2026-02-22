@@ -1089,6 +1089,14 @@ function QuestieDB.IsComplete(questId)
 
     local objectives = questLogEntry.objectives
     if not objectives or #objectives == 0 then
+        -- Before assuming an empty objective list means the quest is done, check if we *expect* objectives from the DB.
+        -- On WotLK private servers, GetQuestObjectives sometimes transiently returns nil during cache rebuilds,
+        -- which leads to IsComplete prematurely returning 1 and unloading map icons in the middle of a quest.
+        local expectedObjectives = QuestieDB.GetQuest(questId) and QuestieDB.GetQuest(questId).ObjectiveData
+        if expectedObjectives and #expectedObjectives > 0 then
+            return 0
+        end
+
         return (noQuestItem and 0) or 1
     end
 
@@ -1234,12 +1242,19 @@ function QuestieDB.GetQuest(questId) -- /dump QuestieDB.GetQuest(867)
     if finishedBy and finishedBy[2] then
         for _, id in pairs(finishedBy[2]) do
             if id then
-                QO.Finisher = {
-                    Type = "object",
-                    Id = id,
-                    ---@type Name @We have to hard-type it here because of the function
-                    Name = QuestieDB.QueryObjectSingle(id, "name")
-                }
+                -- Some custom servers (like Ascension) incorrectly place Item IDs in the GameObject finisher array.
+                -- We verify the object actually exists in the ObjectDB before assigning it as a Finisher, 
+                -- to prevent "rawdata is nil for objectID" errors during Arrow/Map updates.
+                local objectName = QuestieDB.QueryObjectSingle(id, "name")
+                if objectName then
+                    QO.Finisher = {
+                        Type = "object",
+                        Id = id,
+                        Name = objectName
+                    }
+                else
+                    Questie:Debug(Questie.DEBUG_INFO, "[QuestieDB:GetQuest] Ignored invalid object finisher ID:", id, "for quest:", questId)
+                end
             end
         end
     end

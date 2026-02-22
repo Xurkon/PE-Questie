@@ -1322,9 +1322,8 @@ _RegisterObjectiveTooltips = function(objective, questId, blockItemTooltips)
 end
 
 _UnloadAlreadySpawnedIcons = function(objective)
-    if next(objective.spawnList) then
-        for id, _ in pairs(objective.spawnList) do
-            local spawn = objective.AlreadySpawned[id]
+    if objective.AlreadySpawned and next(objective.AlreadySpawned) then
+        for id, spawn in pairs(objective.AlreadySpawned) do
             if spawn then
                 for _, mapIcon in pairs(spawn.mapRefs) do
                     mapIcon:Unload()
