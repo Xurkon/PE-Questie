@@ -1239,7 +1239,7 @@ function QuestieQuest:PopulateObjective(quest, objectiveIndex, objective, blockI
     -- For completed and uncompleted objectives
     _RegisterObjectiveTooltips(objective, quest.Id, blockItemTooltips)
 
-    if completed then
+    if completed or quest.isComplete then
         _UnloadAlreadySpawnedIcons(objective)
         return
     end

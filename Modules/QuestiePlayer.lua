@@ -33,6 +33,7 @@ local playerClassFlagX2 = 1 -- dummy default value to always return class not ma
 local math_max = math.max;
 
 QuestiePlayer.numberOfGroupMembers = 0
+QuestiePlayer.pendingCompleteQuestIds = {}
 
 function QuestiePlayer:Initialize()
     _QuestiePlayer.playerLevel = UnitLevel("player")
