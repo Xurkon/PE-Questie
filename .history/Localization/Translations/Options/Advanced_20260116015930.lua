@@ -302,7 +302,7 @@ local advancedOptionsLocales = {
         ["esES"] = "Es necesario actualizar la base de datos para cambiar el idioma. Presiona recargar para aplicar el nuevo idioma",
         ["frFR"] = "La base de données doit être mise à jour pour changer la langue. Appuyez sur Recharger pour appliquer la nouvelle langue.",
     },
-    ["Questie is under active development and being maintained by Xurkon. Please check my GitHub for the latest build or to report issues. (( https://github.com/Xurkon/PE-Questie ))"] = {
+    ["Questie is under active development for World of Warcraft: Classic. Please check GitHub for the latest alpha builds or to report issues. Or join us on our discord! (( https://github.com/Questie/Questie/ ))"] = {
         ["ptBR"] = "Questie está em desenvolvimento para World of Warcraft: Classic. Verifique o GitHub para obter as versões mais recentes ou relatar problemas. Ou junte-se a nós em nossa discórdia!(( https://github.com/Questie/Questie/ )) ",
         ["ruRU"] = "Questie находится в стадии активной разработки для World of Warcraft: Classic. Проверяйте наличие обновлений на сайте GitHub (https://github.com/Questie/Questie/) или присоединяйтесь к нашему серверу в Discord (https://discord.gg/phKnHVu)",
         ["deDE"] = "Questie befindet sich noch aktiv in der Entwicklungsphase für World of Warcraft: Classic. Für Neuigkeiten und aktuelle Versionen schau auf Github vorbei oder trete unserem Discord Server bei! (( https://github.com/Questie/Questie/ ))",
