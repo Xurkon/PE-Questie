@@ -100,7 +100,6 @@ function QuestieFramePool:GetFrame()
     returnFrame.loaded = true
     returnFrame.shouldBeShowing = nil
     returnFrame.hidden = nil
-    returnFrame._needsUnload = nil
 
     if returnFrame.BaseOnShow then
         returnFrame:SetScript("OnShow", returnFrame.BaseOnShow)
