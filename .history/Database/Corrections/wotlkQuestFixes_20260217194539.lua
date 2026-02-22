@@ -2723,9 +2723,6 @@ function QuestieWotlkQuestFixes:Load()
         },
         [12924] = {
             [questKeys.objectives] = {{{30099,"Fjorn's Anvil Brought to Dun Niffelem"}}},
-            [questKeys.extraObjectives] = {
-                {nil, Questie.ICON_TYPE_TALK, l10n("Ask King Jokkum to allow Thorim's armor to be reforged"), 0, {{"monster", 30105}}},
-            },
         },
         [12925] = {
             [questKeys.preQuestSingle] = {12905},
