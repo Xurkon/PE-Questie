@@ -6,9 +6,6 @@ local QuestieDB = QuestieLoader:ImportModule("QuestieDB")
 ---@type QuestieProfessions
 local QuestieProfessions = QuestieLoader:ImportModule("QuestieProfessions")
 
-local _, playerClass = UnitClass("player")
-local playerFaction = UnitFactionGroup("player")
-
 local tinsert = tinsert
 local sub, bitband, strlen = string.sub, bit.band, string.len
 
@@ -289,7 +286,8 @@ function Townsfolk.PostBoot() -- post DB boot (use queries here)
             or {5140,2928,8924,5173,2930,8923},
         ["DRUID"] = {17034,17026,17035,17021,17038,17036,17037}
     }
-    reagents = reagents[playerClass]
+    local _, playerClass = UnitClass("player")
+    reagents = (playerClass and reagents[playerClass]) or {}
     if Questie.IsSoD then
         table.insert(reagents, 212160) -- In SoD the Chronoboon Displacer is sold by reagent vendors
     end
@@ -316,14 +314,21 @@ end
 function Townsfolk:BuildCharacterTownsfolk()
     Questie.db.char.townsfolk = {}
     Questie.db.char.vendorList = {}
-    Questie.db.char.townsfolkClass = UnitClass("player")
+    
+    local _, playerClass = UnitClass("player")
+    local playerFaction = UnitFactionGroup("player")
+    Questie.db.char.townsfolkClass = playerClass
 
-    for key, npcs in pairs(Questie.db.global.factionSpecificTownsfolk[playerFaction]) do
-        Questie.db.char.townsfolk[key] = npcs
+    if playerFaction and Questie.db.global.factionSpecificTownsfolk[playerFaction] then
+        for key, npcs in pairs(Questie.db.global.factionSpecificTownsfolk[playerFaction]) do
+            Questie.db.char.townsfolk[key] = npcs
+        end
     end
 
-    for key, npcs in pairs(Questie.db.global.classSpecificTownsfolk[playerClass]) do
-        Questie.db.char.townsfolk[key] = npcs
+    if Questie.db.global.classSpecificTownsfolk[playerClass] then
+        for key, npcs in pairs(Questie.db.global.classSpecificTownsfolk[playerClass]) do
+            Questie.db.char.townsfolk[key] = npcs
+        end
     end
 end
 
@@ -356,6 +361,7 @@ local function _UpdateFoodDrink()
 end
 
 function Townsfolk:UpdatePlayerVendors() -- call on levelup
+    local _, playerClass = UnitClass("player")
     _UpdateFoodDrink()
     if playerClass == "HUNTER" then
         _UpdatePetFood()
@@ -366,6 +372,7 @@ function Townsfolk:UpdatePlayerVendors() -- call on levelup
 end
 
 function Townsfolk:PopulateVendors(itemList, existingTable, restrictLevel)
+    local playerFaction = UnitFactionGroup("player")
     local factionKey = playerFaction == "Alliance" and "A" or "H"
     local tbl = existingTable or {}
     -- Create a cache to minimize db calls
