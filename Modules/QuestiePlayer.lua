@@ -36,16 +36,20 @@ QuestiePlayer.numberOfGroupMembers = 0
 QuestiePlayer.pendingCompleteQuestIds = {}
 
 function QuestiePlayer:Initialize()
-    _QuestiePlayer.playerLevel = UnitLevel("player")
+    _QuestiePlayer.playerLevel = UnitLevel("player") or 1
 
     playerRaceId = select(3, UnitRace("player"))
-    playerRaceFlag = 2 ^ (playerRaceId - 1)
-    playerRaceFlagX2 = 2 * playerRaceFlag
+    if playerRaceId then
+        playerRaceFlag = 2 ^ (playerRaceId - 1)
+        playerRaceFlagX2 = 2 * playerRaceFlag
+    end
 
-    playerClassName = select(1, UnitClass("player"))
+    playerClassName = select(1, UnitClass("player")) or "UNKNOWN"
     local classId = select(3, UnitClass("player"))
-    playerClassFlag = 2 ^ (classId - 1)
-    playerClassFlagX2 = 2 * playerClassFlag
+    if classId then
+        playerClassFlag = 2 ^ (classId - 1)
+        playerClassFlagX2 = 2 * playerClassFlag
+    end
 end
 
 --Always compare to the UnitLevel parameter, returning the highest.
