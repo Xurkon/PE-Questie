@@ -4,7 +4,85 @@
 
 ### New Ebonhold Quests
 
-- **Azeroth**: Badlands Trophy (50178) — Kill 1 Rare in Badlands. Includes tracking data for 10 Badlands rares: Broken Tooth, Zaricotl, 7:XT, Anathemus, Barnabus, Rumbler, Siege Golem, Digmaster Shovelphlange, Shadowforge Commander, War Golem.
+#### 🗺️ Azeroth
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50178 | Badlands Trophy | Badlands | Kill 1 Rare (10 rares tracked) |
+| 50176 | Arathi Trophy | Arathi Highlands | Kill 1 Rare (10 rares tracked) |
+| 50175 | Alterac Trophy | Alterac Mountains | Kill 1 Rare (8 rares tracked) |
+| 50162 | Wetlands Trophy | Wetlands | Kill 1 Rare (8 rares tracked) |
+| 50160 | Redridge Trophy | Redridge Mountains | Kill 1 Rare (8 rares tracked) |
+| 50157 | Modan Trophy | Loch Modan | Kill 1 Rare (7 rares tracked) |
+| 50156 | Westfall Trophy | Westfall | Kill 1 Rare (9 rares tracked) |
+| 50173 | Northern Jungle Trophy | Stranglethorn Vale | Kill 1 Rare (9 rares tracked) |
+| 50183 | Southern Jungle Trophy | Stranglethorn Vale | Kill 1 Rare (9 rares tracked) |
+| 50164 | Tirisfal Trophy | Tirisfal Glades | Kill 1 Rare (9 rares tracked) |
+| 50153 | Morogh Trophy | Dun Morogh | Kill 1 Rare (6 rares tracked) |
+| 50097 | Elwynn Errands | Elwynn Forest | Complete 6 quests |
+| 50098 | Morogh Missions | Dun Morogh | Complete 6 quests |
+| 50105 | Redridge Resolve | Redridge Mountains | Complete 6 quests |
+
+#### 🌿 Kalimdor
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50154 | Teldrassil Trophy | Teldrassil | Kill 1 Rare (6 rares tracked) |
+| 50034 | Ashen Corruption | Ashenvale | Kill 40 Demons (23 NPCs tracked) |
+| 50020 | Spires of Chaos | Thousand Needles | Kill 30 Elementals (5 NPCs tracked) |
+| 50099 | Shadow of Teldrassil | Teldrassil | Complete 6 quests |
+| 50103 | Darkshore Defense | Darkshore | Complete 6 quests |
+| 50104 | Bloodmyst Recovery | Bloodmyst Isle | Complete 6 quests |
+| 50100 | Azuremyst Aid | Azuremyst Isle | Complete 6 quests |
+| 50108 | Trials of Durotar | Durotar | Complete 6 quests |
+
+#### 🌋 Outland
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50197 | Shadowmoon Trophy | Shadowmoon Valley | Kill 1 Rare (3 rares tracked) |
+| 50195 | Blade's Edge Trophy | Blade's Edge Mountains | Kill 1 Rare (3 rares tracked) |
+| 50196 | Netherstorm Trophy | Netherstorm | Kill 1 Rare (3 rares tracked) |
+| 50192 | Zangarmarsh Trophy | Zangarmarsh | Kill 1 Rare (3 rares tracked) |
+| 50045 | Demon's at the Edge | Blade's Edge Mountains | Kill 40 Demons (37 NPCs tracked) |
+| 50044 | Fel Scars of Nagrand | Nagrand | Kill 40 Demons (14 NPCs tracked) |
+| 50026 | Elemental Balance | Nagrand | Kill 30 Elementals (12 NPCs tracked) |
+| 50060 | Skies of Blade's Edge | Blade's Edge Mountains | Kill 30 Dragonkin (17 NPCs tracked) |
+| 50083 | Forest Stalkers | Terokkar Forest | Kill 75 Beasts (53 NPCs tracked) |
+| 50082 | Marsh Predators | Zangarmarsh | Kill 75 Beasts (34 NPCs tracked) |
+| 50085 | Savage Heights | Blade's Edge Mountains | Kill 75 Beasts (47 NPCs tracked) |
+| 50086 | Unstable Fauna | Netherstorm | Kill 75 Beasts (18 NPCs tracked) |
+| 50087 | Shadowed Beasts | Shadowmoon Valley | Kill 75 Beasts (25 NPCs tracked) |
+
+#### ❄️ Northrend
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50200 | Fjord Trophy | Howling Fjord | Kill 1 Rare (3 rares tracked) |
+| 50201 | Dragonblight Trophy | Dragonblight | Kill 1 Rare (3 rares tracked) |
+| 50202 | Grizzly Trophy | Grizzly Hills | Kill 1 Rare (4 rares tracked) |
+| 50203 | Zul'Drak Trophy | Zul'Drak | Kill 1 Rare (4 rares tracked) |
+| 50199 | Borean Trophy | Borean Tundra | Kill 1 Rare (3 rares tracked) |
+| 50205 | Storm Peaks Trophy | The Storm Peaks | Kill 1 Rare (4 rares tracked) |
+| 50063 | Frostbound Brood | Borean Tundra | Kill 30 Dragonkin (16 NPCs tracked) |
+| 50064 | Heart of the Dragonflights | Dragonblight | Kill 30 Dragonkin (49 NPCs tracked) |
+| 50066 | Stormforged Scales | The Storm Peaks | Kill 30 Dragonkin (7 NPCs tracked) |
+| 50030 | Tundra Turbulence | Borean Tundra | Kill 30+ Elementals (14 NPCs tracked) |
+| 50031 | Stormbound | The Storm Peaks | Kill 30 Elementals (11 NPCs tracked) |
+| 50089 | Tundra Hunters | Borean Tundra | Kill 75 Beasts (43 NPCs tracked) |
+| 50094 | Wild Basin | Sholazar Basin | Kill 75 Beasts (29 NPCs tracked) |
+| 50095 | Peak Predators | The Storm Peaks | Kill 75 Beasts (24 NPCs tracked) |
+| 50096 | Peak Predators | Icecrown | Kill 75 Beasts (12 NPCs tracked) |
+| 50145 | Fjord Front | Howling Fjord | Complete 6 quests |
+| 50149 | Basin Expeditions | Sholazar Basin | Complete 6 quests |
+| 50150 | Storm Peak Orders | The Storm Peaks | Complete 6 quests |
+| 50151 | Icecrown Advance | Icecrown | Complete 6 quests |
+
+#### Other
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50111 | Song of the Woods | Eversong Woods | Complete 6 quests |
 
 ### NPC Data
 
@@ -12,7 +90,7 @@
 
 ### Bug Fixes
 
-- **[UI]** Fixed spammy `[CRITICAL] No AreaId found for UiMapId` errors appearing in chat when entering Ascension hub cities (Stormwind, Darnassus, Shattrath, etc.). On Ascension, `C_Map.GetBestMapForUnit("player")` returns a continent-level UiMapId for certain cities (e.g. `1415` = Eastern Kingdoms, `1414` = Kalimdor, `1945` = Outland) — Questie logged a CRITICAL error since these have no AreaId mapping, even though the `nil` return was already handled gracefully by callers. Downgraded from `DEBUG_CRITICAL` to `DEBUG_DEVELOP` in `zoneDB.lua`.
+- **[UI]** Fixed spammy `[CRITICAL] No AreaId found for UiMapId` errors appearing in chat when entering Ascension hub cities (Stormwind, Darnassus, Shattrath, etc.). On Ascension, `C_Map.GetBestMapForUnit("player")` returns a continent-level UiMapId for these cities — Questie logged a CRITICAL error since continent maps have no AreaId mapping, even though the `nil` return was already handled gracefully by callers. Downgraded from `DEBUG_CRITICAL` to `DEBUG_DEVELOP` in `zoneDB.lua`.
 
 ## v9.8.8
 
