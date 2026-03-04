@@ -708,6 +708,14 @@ function QuestieNPCFixes:Load()
             [npcKeys.spawns] = { [zoneIDs.SWAMP_OF_SORROWS] = { { 54.9, 34.1 } } },
             [npcKeys.waypoints] = { [zoneIDs.SWAMP_OF_SORROWS] = { { { 54.9, 34.1 }, { 55.7, 36.1 }, { 55.7, 37.7 }, { 54.5, 38.7 }, { 52.9, 38.7 }, { 51.3, 38.5 }, { 49.7, 38.5 }, { 48.3, 38.5 }, { 47, 38.5 }, { 45.3, 37.7 }, { 43.9, 36 }, { 43.1, 34 }, { 42.9, 32.1 }, { 41.5, 31.9 }, { 40, 33 }, { 39.1, 35.0 }, { 38.3, 36.9 }, { 37.7, 38.7 }, { 37.7, 40.8 }, { 37.6, 42.8 }, { 37.2, 44.5 }, { 36.1, 45.5 }, { 34.7, 45.1 }, { 33.7, 43.1 }, { 33.2, 40.6 }, { 32.9, 38.7 }, { 32.3, 36.1 } } } },
         },
+        -- Sandstone Giants quest (50006): Deep Dweller - augmented spawn data from Wowhead
+        [5467] = {
+            [npcKeys.spawns] = { [zoneIDs.TANARIS] = { { 64, 63.2 }, { 64.2, 67.2 }, { 64.2, 68.6 }, { 64.2, 70.2 }, { 64.2, 71.4 }, { 64.4, 68.2 }, { 64.6, 68.4 }, { 64.8, 69 }, { 65, 65.4 }, { 65.4, 67.2 }, { 66.6, 62 }, { 67.2, 65.4 }, { 67.4, 63.6 }, { 68.4, 59.2 }, { 68.4, 64 }, { 68.6, 59.2 }, { 68.6, 59.8 }, { 68.6, 64.2 }, { 69.8, 60 }, { 71.2, 60.4 }, { 71.4, 58.2 }, { 71.4, 60.8 }, { 72.2, 57 }, { 72.4, 56 }, { 72.4, 59.6 }, { 72.6, 56.8 }, { 72.6, 59.2 }, { 73.6, 57.8 } } },
+        },
+        -- Sandstone Giants quest (50006): Raging Dune Smasher - spawns were nil, added from Wowhead
+        [5470] = {
+            [npcKeys.spawns] = { [zoneIDs.TANARIS] = { { 32.4, 75.6 }, { 34.6, 77.8 }, { 36.2, 77.4 }, { 36.2, 78.4 }, { 36.2, 78.6 }, { 36.4, 76.4 }, { 36.4, 80.4 }, { 36.4, 80.8 }, { 36.8, 76 }, { 36.8, 79 }, { 37, 78 }, { 37.2, 76.6 }, { 37.2, 81.4 }, { 37.4, 79.6 }, { 37.4, 81.6 }, { 37.6, 76.8 }, { 37.6, 78 }, { 37.6, 78.6 }, { 37.6, 80.4 }, { 37.6, 81.4 }, { 37.6, 81.6 }, { 38.8, 80.4 }, { 39.4, 79 } } },
+        },
         [5543] = {
             [npcKeys.spawns] = { [zoneIDs.THUNDER_BLUFF] = { { 27.2, 24.4 } } },
             [npcKeys.waypoints] = { [zoneIDs.THUNDER_BLUFF] = { { { 27.2, 24.4 }, { 27.4, 24.6 }, { 28, 25.2 }, { 28.4, 25.6 }, { 28.4, 26.8 }, { 28.6, 25.8 }, { 28.6, 26.6 } } } },
@@ -1171,7 +1179,7 @@ function QuestieNPCFixes:Load()
         },
         [9598] = {
             [npcKeys.spawns] = { [zoneIDs.FELWOOD] = { { 49.57, 29.60 } } }, -- #1516
-            [npcKeys.zoneID] = zoneIDs.FELWOOD,                     -- #1516
+            [npcKeys.zoneID] = zoneIDs.FELWOOD,                              -- #1516
         },
         [9621] = {
             [npcKeys.zoneID] = zoneIDs.UN_GORO_CRATER,
@@ -1891,19 +1899,19 @@ function QuestieNPCFixes:Load()
             [npcKeys.spawns] = { [zoneIDs.DUSTWALLOW_MARSH] = { { 37.8, 50.29 }, { 49.06, 57.33 }, { 44.08, 50.17 }, { 42.35, 55 }, { 47.26, 54.65 } } },
         },
         [14305] = {
-            [npcKeys.zoneID] = zoneIDs.STORMWIND_CITY,                       -- default zone where you start the chain
+            [npcKeys.zoneID] = zoneIDs.STORMWIND_CITY,                              -- default zone where you start the chain
             [npcKeys.spawns] = { [zoneIDs.STORMWIND_CITY] = { { 47.32, 38.58 } } }, -- only SW for consistency
         },
         [14373] = {
             [npcKeys.spawns] = { [zoneIDs.FERALAS] = { { 74.4, 44 } } },
         },
         [14444] = {
-            [npcKeys.zoneID] = zoneIDs.ORGRIMMAR,                       -- default zone where you start the chain
+            [npcKeys.zoneID] = zoneIDs.ORGRIMMAR,                              -- default zone where you start the chain
             [npcKeys.spawns] = { [zoneIDs.ORGRIMMAR] = { { 70.92, 25.62 } } }, -- only OG for consistency
         },
         [14500] = {
             [npcKeys.spawns] = { [zoneIDs.SCHOLOMANCE] = { { -1, -1 } } }, -- #1506
-            [npcKeys.zoneID] = zoneIDs.SCHOLOMANCE,                -- #1506
+            [npcKeys.zoneID] = zoneIDs.SCHOLOMANCE,                        -- #1506
         },
         [14502] = {
             [npcKeys.zoneID] = zoneIDs.DIRE_MAUL,
