@@ -1616,10 +1616,19 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "Kill Sandstone Giants"
         },
         [10] = {
-            {
-                { 5469, "Dune Smasher slain" }
+            nil,              -- [1] creatureObjective (not used)
+            nil,              -- [2] objectObjective (not used)
+            nil,              -- [3] itemObjective (not used)
+            nil,              -- [4] reputationObjective (not used)
+            {                 -- [5] killCreditObjective
+                {
+                    { 5469 }, -- All NPC IDs
+                    5469,     -- Root ID (Icon/Text)
+                    "Sandstone Giants slain"
+                }
             }
         },
+        [30] = 30, -- Objective Count
     },
 }
 
