@@ -53,6 +53,10 @@ local questLogUpdateQueueSize = 1
 local skipNextUQLCEvent = false
 local doFullQuestLogScan = false
 local deletedQuestItem = false
+-- Debounce state for BAG_UPDATE_DELAYED: prevents hammering UpdateAllQuests on every bag slot change.
+-- Also schedules a follow-up scan to catch server-side quest-log counter lag (loot bot batch loots).
+local _bagUpdateDebounceTimer = nil
+local _bagUpdateFollowUpTimer = nil
 
 --- Registers all events that are required for questing (accepting, removing, objective updates, ...)
 function QuestEventHandler:RegisterEvents()
@@ -90,7 +94,7 @@ function QuestEventHandler:RegisterEvents()
 
             for questLogIndex = 1, 75 do
                 local title, level, questTag, isHeader, isCollapsed, isComplete, isDaily, questId = GetQuestLogTitle(
-                questLogIndex)
+                    questLogIndex)
 
                 if title and questId and (not isHeader) then
                     quest = QuestieDB.GetQuest(questId)
@@ -691,10 +695,38 @@ function _QuestEventHandler:OnEvent(event, ...)
         Questie:Debug(Questie.DEBUG_DEVELOP, "[EVENT] NEW_RECIPE_LEARNED (QuestEventHandler)")
         doFullQuestLogScan = true -- If this event is related to a spell objective, a QUEST_LOG_UPDATE will be fired afterwards
     elseif event == "BAG_UPDATE_DELAYED" then
-        -- Autoloot bots can bypass the standard loot frame, skipping QUEST_WATCH_UPDATE for the last items looted.
-        -- Flag a full scan and trigger the update immediately so the tracker refreshes.
+        -- Autoloot bots bypass the loot frame entirely, so QUEST_WATCH_UPDATE never fires for bot-looted items.
+        -- Additionally, when a bot loots a stack very quickly the server batches the quest-objective counter
+        -- updates so C_QuestLog.GetQuestObjectives still returns the OLD count when this event fires.
+        -- Strategy:
+        --   1) Immediate scan (catches single-item normal loots and is fast).
+        --   2) Debounce rapid fires to at most one extra scan per 0.3s burst.
+        --   3) Always schedule a follow-up scan 2 s later so the server counter has time to catch up.
         doFullQuestLogScan = true
         _QuestEventHandler:QuestLogUpdate()
+
+        -- Cancel any pending debounce timer so rapid fires collapse into one.
+        if _bagUpdateDebounceTimer then
+            _bagUpdateDebounceTimer:Cancel()
+            _bagUpdateDebounceTimer = nil
+        end
+        _bagUpdateDebounceTimer = C_Timer.NewTimer(0.3, function()
+            _bagUpdateDebounceTimer = nil
+            -- Second scan: picks up any items the immediate scan missed.
+            doFullQuestLogScan = true
+            _QuestEventHandler:QuestLogUpdate()
+        end)
+
+        -- Follow-up scan: wait for the server's quest counters to reflect the full loot batch.
+        if _bagUpdateFollowUpTimer then
+            _bagUpdateFollowUpTimer:Cancel()
+        end
+        _bagUpdateFollowUpTimer = C_Timer.NewTimer(2.0, function()
+            _bagUpdateFollowUpTimer = nil
+            Questie:Debug(Questie.DEBUG_DEVELOP, "[BAG_UPDATE_DELAYED] Follow-up scan for batch loot bot items")
+            doFullQuestLogScan = true
+            _QuestEventHandler:QuestLogUpdate()
+        end)
     elseif event == "PLAYER_INTERACTION_MANAGER_FRAME_HIDE" then
         local eventType = select(1, ...)
         if eventType == 1 then
