@@ -1422,6 +1422,126 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [30] = 30, -- Kill count
     },
 
+    -- Quest 50019: Marshborn Menace
+    -- Kill 30 elementals in Dustwallow Marsh
+    [50019] = {
+        [1] = "Marshborn Menace",  -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 35,                  -- Min level
+        [5] = 40,                  -- Quest level
+        [17] = 15,                 -- Zone (Dustwallow Marsh)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 30 Elementals in Dustwallow Marsh"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 5 elemental NPCs in Dustwallow Marsh
+                    { 4382, 4385, 4386, 4387, 14231 },
+                    4382, -- RootId: Withervine Creeper (representative elemental)
+                    "Elemental slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count
+    },
+
+
+    -- Quest 50052: Black Dragonflight Remnants
+    -- Kill 30 dragonkin in Badlands
+    [50052] = {
+        [1] = "Black Dragonflight Remnants", -- Quest name
+        [2] = { nil, { 600600 } },           -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 35,                            -- Min level
+        [5] = 40,                            -- Quest level
+        [17] = 3,                            -- Zone (Badlands)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 30 Dragonkin in Badlands"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 4 dragonkin NPCs in Badlands
+                    { 2757, 2725, 2759, 2726 },
+                    2725, -- RootId: Scalding Whelp
+                    "Dragonkin slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count
+    },
+
+    -- Quest 50068: Savage Badlands
+    -- Kill 75 beasts in Badlands
+    [50068] = {
+        [1] = "Savage Badlands",   -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 35,                  -- Min level
+        [5] = 40,                  -- Quest level
+        [17] = 3,                  -- Zone (Badlands)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 75 Beasts in Badlands"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 15 beast NPCs in Badlands
+                    { 2850, 2931, 2753, 2831, 2731, 2729, 2727, 2830, 2732, 2728, 2734, 2730, 2829, 6013, 9297 },
+                    2727, -- RootId: Crag Coyote
+                    "Beast slain"
+                }
+            }
+        },
+
+        [30] = 75, -- Kill count
+    },
+
+    -- Quest 50051: Marshscale Menace
+    -- Kill 30 dragonkin in Dustwallow Marsh
+    [50051] = {
+        [1] = "Marshscale Menace", -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 35,                  -- Min level
+        [5] = 40,                  -- Quest level
+        [17] = 15,                 -- Zone (Dustwallow Marsh)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 30 Dragonkin in Dustwallow Marsh"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 11 hostile dragonkin NPCs in Dustwallow Marsh
+                    { 4324, 10321, 4334, 4328, 4323, 23789, 4339, 4331, 4329, 23969, 23687 },
+                    4324, -- RootId: Searing Whelp
+                    "Dragonkin slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count
+    },
 
     -- Quest 50178: Badlands Trophy
     -- Kill 1 rare in Badlands
@@ -1453,6 +1573,54 @@ EbonholdDB.questData = EbonholdDB.questData or {
         [30] = 1, -- Kill count
     },
 
+    -- Quest 50128: Southern Jungle
+    -- Complete 6 quests in Stranglethorn Vale (Southern)
+    [50128] = {
+        [1] = "Southern Jungle",   -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 45,                  -- Quest level
+        [5] = 25,                  -- Min level
+        [17] = 33,                 -- Zone (Stranglethorn Vale)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Complete 6 quests in Stranglethorn Vale (Southern)"
+        },
+        [9] = { "Complete 6 quests in Stranglethorn Vale (Southern)", nil },
+    },
+
+    -- Quest 50130: Felwood Restoration
+    -- Complete 6 quests in Felwood
+    [50130] = {
+        [1] = "Felwood Restoration", -- Quest name
+        [2] = { nil, { 600600 } },   -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 55,                    -- Quest level
+        [5] = 48,                    -- Min level
+        [17] = 361,                  -- Zone (Felwood)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward.\n\nIf you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.\n\nThis quest cannot be completed inside starting area.",
+            "Complete 6 quests in Felwood"
+        },
+        [9] = { "Complete 6 quests in Felwood", nil },
+    },
+
+    -- Quest 50006: Sandstone Giants
+    -- Kill Giants in Tanaris
+    [50006] = {
+        [1] = "Sandstone Giants",  -- Quest name
+        [2] = { nil, { 600600 } }, -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 45,                  -- Quest level
+        [5] = 40,                  -- Min level
+        [17] = 440,                -- Zone (Tanaris)
+        [8] = {
+            "Kill Giants in Tanaris.",
+            "Kill Sandstone Giants"
+        },
+        [10] = {
+            {
+                { 5469, "Dune Smasher slain" }
+            }
+        },
+    },
 }
 
 -- Backward compatibility

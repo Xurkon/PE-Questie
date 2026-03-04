@@ -112,14 +112,23 @@ function Questie:GetClassColor(class)
     end
 end
 
+local orig_Print = Questie.Print
+
+function Questie:Print(...)
+    Questie:Debug(Questie.DEBUG_INFO, ...)
+end
+
 function Questie:Error(...)
-    Questie:Print("|cffff0000[ERROR]|r", ...)
+    if orig_Print then
+        orig_Print(Questie, "|cffff0000[ERROR]|r", ...)
+    else
+        print("|cffff0000[ERROR]|r", ...)
+    end
 end
 
 function Questie:Warning(...)
-    if Questie.db.profile.debugEnabled then -- prints regardless of "debugPrint" toggle
-        Questie:Print("|cffffff00[WARNING]|r", ...)
-    end
+    -- prints regardless of "debugPrint" toggle used to be here, now respects debugPrint via Debug
+    Questie:Debug(Questie.DEBUG_INFO, "|cffffff00[WARNING]|r", ...)
 end
 
 -- Global debug levels
@@ -140,54 +149,58 @@ function Questie:Debug(msgDebugLevel, ...)
         end
 
         local prefix = ""
-        if (band(msgDebugLevel, Questie.DEBUG_CRITICAL) ~= 0) then prefix = prefix.."|cff00f2e6[CRITICAL]|r" end
-        if (band(msgDebugLevel, Questie.DEBUG_ELEVATED) ~= 0) then prefix = prefix.."|cffebf441[ELEVATED]|r" end
-        if (band(msgDebugLevel, Questie.DEBUG_INFO) ~= 0) then prefix = prefix.."|cff00bc32[INFO]|r" end
-        if (band(msgDebugLevel, Questie.DEBUG_DEVELOP) ~= 0) then prefix = prefix.."|cff7c83ff[DEVELOP]|r" end
-        if (band(msgDebugLevel, Questie.DEBUG_SPAM) ~= 0) then prefix = prefix.."|cffff8484[SPAM]|r" end
+        if (band(msgDebugLevel, Questie.DEBUG_CRITICAL) ~= 0) then prefix = prefix .. "|cff00f2e6[CRITICAL]|r " end
+        if (band(msgDebugLevel, Questie.DEBUG_ELEVATED) ~= 0) then prefix = prefix .. "|cffebf441[ELEVATED]|r " end
+        if (band(msgDebugLevel, Questie.DEBUG_INFO) ~= 0) then prefix = prefix .. "|cff00bc32[INFO]|r " end
+        if (band(msgDebugLevel, Questie.DEBUG_DEVELOP) ~= 0) then prefix = prefix .. "|cff7c83ff[DEVELOP]|r " end
+        if (band(msgDebugLevel, Questie.DEBUG_SPAM) ~= 0) then prefix = prefix .. "|cffff8484[SPAM]|r " end
 
-        Questie:Print(prefix, ...)
+        if orig_Print then
+            orig_Print(Questie, prefix, ...)
+        else
+            print(prefix, ...)
+        end
     end
 end
 
 Questie.icons = {
-    ["slay"] = QuestieLib.AddonPath.."Icons\\slay.blp",
-    ["loot"] = QuestieLib.AddonPath.."Icons\\loot.blp",
-    ["event"] = QuestieLib.AddonPath.."Icons\\event.blp",
-    ["object"] = QuestieLib.AddonPath.."Icons\\object.blp",
-    ["talk"] = QuestieLib.AddonPath.."Icons\\chatbubblegossipicon.blp",
-    ["available"] = QuestieLib.AddonPath.."Icons\\available.blp",
-    ["available_gray"] = QuestieLib.AddonPath.."Icons\\available_gray.blp",
-    ["complete"] = QuestieLib.AddonPath.."Icons\\complete.blp",
-    ["incomplete"] = QuestieLib.AddonPath.."Icons\\incomplete.blp",
-    ["interact"] = QuestieLib.AddonPath.."Icons\\interact.blp",
-    ["glow"] = QuestieLib.AddonPath.."Icons\\glow.blp",
-    ["repeatable"] = QuestieLib.AddonPath.."Icons\\repeatable.blp",
-    ["repeatable_complete"] = QuestieLib.AddonPath.."Icons\\repeatable_complete.blp",
-    ["eventquest"] = QuestieLib.AddonPath.."Icons\\eventquest.blp",
-    ["eventquest_complete"] = QuestieLib.AddonPath.."Icons\\eventquest_complete.blp",
-    ["pvpquest"] = QuestieLib.AddonPath.."Icons\\pvpquest.blp",
-    ["pvpquest_complete"] = QuestieLib.AddonPath.."Icons\\pvpquest_complete.blp",
-    ["node"] = QuestieLib.AddonPath.."Icons\\node.tga",
+    ["slay"] = QuestieLib.AddonPath .. "Icons\\slay.blp",
+    ["loot"] = QuestieLib.AddonPath .. "Icons\\loot.blp",
+    ["event"] = QuestieLib.AddonPath .. "Icons\\event.blp",
+    ["object"] = QuestieLib.AddonPath .. "Icons\\object.blp",
+    ["talk"] = QuestieLib.AddonPath .. "Icons\\chatbubblegossipicon.blp",
+    ["available"] = QuestieLib.AddonPath .. "Icons\\available.blp",
+    ["available_gray"] = QuestieLib.AddonPath .. "Icons\\available_gray.blp",
+    ["complete"] = QuestieLib.AddonPath .. "Icons\\complete.blp",
+    ["incomplete"] = QuestieLib.AddonPath .. "Icons\\incomplete.blp",
+    ["interact"] = QuestieLib.AddonPath .. "Icons\\interact.blp",
+    ["glow"] = QuestieLib.AddonPath .. "Icons\\glow.blp",
+    ["repeatable"] = QuestieLib.AddonPath .. "Icons\\repeatable.blp",
+    ["repeatable_complete"] = QuestieLib.AddonPath .. "Icons\\repeatable_complete.blp",
+    ["eventquest"] = QuestieLib.AddonPath .. "Icons\\eventquest.blp",
+    ["eventquest_complete"] = QuestieLib.AddonPath .. "Icons\\eventquest_complete.blp",
+    ["pvpquest"] = QuestieLib.AddonPath .. "Icons\\pvpquest.blp",
+    ["pvpquest_complete"] = QuestieLib.AddonPath .. "Icons\\pvpquest_complete.blp",
+    ["node"] = QuestieLib.AddonPath .. "Icons\\node.tga",
     ["player"] = "Interface\\WorldMap\\WorldMapPartyIcon",
-    ["fav"] = QuestieLib.AddonPath.."Icons\\fav.tga",
-    ["faction_alliance"] = QuestieLib.AddonPath.."Icons\\icon_alliance.tga",
-    ["faction_horde"] = QuestieLib.AddonPath.."Icons\\icon_horde.tga",
-    ["loot_mono"] = QuestieLib.AddonPath.."Icons\\loot_mono.tga",
-    ["node_cut"] = QuestieLib.AddonPath.."Icons\\node_cut.tga",
-    ["object_mono"] = QuestieLib.AddonPath.."Icons\\object_mono.tga",
-    ["route"] = QuestieLib.AddonPath.."Icons\\route.tga",
-    ["slay_mono"] = QuestieLib.AddonPath.."Icons\\slay_mono.tga",
-    ["sod_rune"] = QuestieLib.AddonPath.."Icons\\sod_rune.tga",
-    ["startend"] = QuestieLib.AddonPath.."Icons\\startend.tga",
-    ["startendstart"] = QuestieLib.AddonPath.."Icons\\startendstart.tga",
-    ["tracker_clean"] = QuestieLib.AddonPath.."Icons\\tracker_clean.tga",
-    ["tracker_close"] = QuestieLib.AddonPath.."Icons\\tracker_close.tga",
-    ["tracker_database"] = QuestieLib.AddonPath.."Icons\\tracker_database.tga",
-    ["tracker_giver"] = QuestieLib.AddonPath.."Icons\\tracker_giver.tga",
-    ["tracker_quests"] = QuestieLib.AddonPath.."Icons\\tracker_quests.tga",
-    ["tracker_search"] = QuestieLib.AddonPath.."Icons\\tracker_search.tga",
-    ["tracker_settings"] = QuestieLib.AddonPath.."Icons\\tracker_settings.tga",
+    ["fav"] = QuestieLib.AddonPath .. "Icons\\fav.tga",
+    ["faction_alliance"] = QuestieLib.AddonPath .. "Icons\\icon_alliance.tga",
+    ["faction_horde"] = QuestieLib.AddonPath .. "Icons\\icon_horde.tga",
+    ["loot_mono"] = QuestieLib.AddonPath .. "Icons\\loot_mono.tga",
+    ["node_cut"] = QuestieLib.AddonPath .. "Icons\\node_cut.tga",
+    ["object_mono"] = QuestieLib.AddonPath .. "Icons\\object_mono.tga",
+    ["route"] = QuestieLib.AddonPath .. "Icons\\route.tga",
+    ["slay_mono"] = QuestieLib.AddonPath .. "Icons\\slay_mono.tga",
+    ["sod_rune"] = QuestieLib.AddonPath .. "Icons\\sod_rune.tga",
+    ["startend"] = QuestieLib.AddonPath .. "Icons\\startend.tga",
+    ["startendstart"] = QuestieLib.AddonPath .. "Icons\\startendstart.tga",
+    ["tracker_clean"] = QuestieLib.AddonPath .. "Icons\\tracker_clean.tga",
+    ["tracker_close"] = QuestieLib.AddonPath .. "Icons\\tracker_close.tga",
+    ["tracker_database"] = QuestieLib.AddonPath .. "Icons\\tracker_database.tga",
+    ["tracker_giver"] = QuestieLib.AddonPath .. "Icons\\tracker_giver.tga",
+    ["tracker_quests"] = QuestieLib.AddonPath .. "Icons\\tracker_quests.tga",
+    ["tracker_search"] = QuestieLib.AddonPath .. "Icons\\tracker_search.tga",
+    ["tracker_settings"] = QuestieLib.AddonPath .. "Icons\\tracker_settings.tga",
 }
 
 Questie.usedIcons = {}
@@ -219,16 +232,20 @@ function Questie:SetIcons()
     Questie.usedIcons[Questie.ICON_TYPE_OBJECT] = Questie.db.profile.ICON_OBJECT or Questie.icons["object"]
     Questie.usedIcons[Questie.ICON_TYPE_TALK] = Questie.db.profile.ICON_TALK or Questie.icons["talk"]
     Questie.usedIcons[Questie.ICON_TYPE_AVAILABLE] = Questie.db.profile.ICON_AVAILABLE or Questie.icons["available"]
-    Questie.usedIcons[Questie.ICON_TYPE_AVAILABLE_GRAY] = Questie.db.profile.ICON_AVAILABLE_GRAY or Questie.icons["available_gray"]
+    Questie.usedIcons[Questie.ICON_TYPE_AVAILABLE_GRAY] = Questie.db.profile.ICON_AVAILABLE_GRAY or
+        Questie.icons["available_gray"]
     Questie.usedIcons[Questie.ICON_TYPE_COMPLETE] = Questie.db.profile.ICON_COMPLETE or Questie.icons["complete"]
     Questie.usedIcons[Questie.ICON_TYPE_INCOMPLETE] = Questie.db.profile.ICON_INCOMPLETE or Questie.icons["incomplete"]
     Questie.usedIcons[Questie.ICON_TYPE_GLOW] = Questie.db.profile.ICON_GLOW or Questie.icons["glow"]
     Questie.usedIcons[Questie.ICON_TYPE_REPEATABLE] = Questie.db.profile.ICON_REPEATABLE or Questie.icons["repeatable"]
-    Questie.usedIcons[Questie.ICON_TYPE_REPEATABLE_COMPLETE] = Questie.db.profile.ICON_REPEATABLE_COMPLETE or Questie.icons["complete"]
+    Questie.usedIcons[Questie.ICON_TYPE_REPEATABLE_COMPLETE] = Questie.db.profile.ICON_REPEATABLE_COMPLETE or
+        Questie.icons["complete"]
     Questie.usedIcons[Questie.ICON_TYPE_EVENTQUEST] = Questie.db.profile.ICON_EVENTQUEST or Questie.icons["eventquest"]
-    Questie.usedIcons[Questie.ICON_TYPE_EVENTQUEST_COMPLETE] = Questie.db.profile.ICON_EVENTQUEST_COMPLETE or Questie.icons["complete"]
+    Questie.usedIcons[Questie.ICON_TYPE_EVENTQUEST_COMPLETE] = Questie.db.profile.ICON_EVENTQUEST_COMPLETE or
+        Questie.icons["complete"]
     Questie.usedIcons[Questie.ICON_TYPE_PVPQUEST] = Questie.db.profile.ICON_PVPQUEST or Questie.icons["pvpquest"]
-    Questie.usedIcons[Questie.ICON_TYPE_PVPQUEST_COMPLETE] = Questie.db.profile.ICON_PVPQUEST_COMPLETE or Questie.icons["complete"]
+    Questie.usedIcons[Questie.ICON_TYPE_PVPQUEST_COMPLETE] = Questie.db.profile.ICON_PVPQUEST_COMPLETE or
+        Questie.icons["complete"]
     Questie.usedIcons[Questie.ICON_TYPE_INTERACT] = Questie.db.profile.ICON_TYPE_INTERACT or Questie.icons["interact"]
     Questie.usedIcons[Questie.ICON_TYPE_SODRUNE] = Questie.icons["sod_rune"]
 end

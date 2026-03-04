@@ -209,7 +209,9 @@ QuestieInit.Stages[1] = function() -- run as a coroutine
 
     -- Check if the DB needs to be recompiled
     if (not dbIsCompiled) or (QuestieLib:GetAddonVersionString() ~= dbCompiledOnVersion) or (l10n:GetUILocale() ~= dbCompiledLang) or (Questie.db.global.dbCompiledExpansion ~= WOW_PROJECT_ID) then
-        print("\124cFFAAEEFF" .. l10n("Questie DB has updated!") .. "\124r\124cFFFF6F22 " .. l10n("Data is being processed, this may take a few moments and cause some lag..."))
+        print("\124cFFAAEEFF" ..
+        l10n("Questie DB has updated!") ..
+        "\124r\124cFFFF6F22 " .. l10n("Data is being processed, this may take a few moments and cause some lag..."))
         loadFullDatabase()
         QuestieDBCompiler:Compile()
         dbCompiled = true
@@ -330,15 +332,18 @@ QuestieInit.Stages[3] = function() -- run as a coroutine
     if Questie.db.profile.showAQWarEffortQuests and ((not Questie.db.profile.aqWarningPrintDate) or (Questie.db.profile.aqWarningPrintDate < dateToday)) then
         Questie.db.profile.aqWarningPrintDate = dateToday
         C_Timer.After(2, function()
-            print("|cffff0000-----------------------------|r")
-            Questie:Print("|cffff0000The AQ War Effort quests are shown for you. If your server is done you can hide those quests in the General settings of Questie!|r");
-            print("|cffff0000-----------------------------|r")
+            Questie:Print("|cffff0000-----------------------------|r")
+            Questie:Print(
+            "|cffff0000The AQ War Effort quests are shown for you. If your server is done you can hide those quests in the General settings of Questie!|r");
+            Questie:Print("|cffff0000-----------------------------|r")
         end)
     end
 
     if Questie.IsTBC and (not Questie.db.global.isIsleOfQuelDanasPhaseReminderDisabled) then
         C_Timer.After(2, function()
-            Questie:Print(l10n("Current active phase of Isle of Quel'Danas is '%s'. Check the General settings to change the phase or disable this message.", IsleOfQuelDanas.localizedPhaseNames[Questie.db.global.isleOfQuelDanasPhase]))
+            Questie:Print(l10n(
+            "Current active phase of Isle of Quel'Danas is '%s'. Check the General settings to change the phase or disable this message.",
+                IsleOfQuelDanas.localizedPhaseNames[Questie.db.global.isleOfQuelDanasPhase]))
         end)
     end
 
@@ -401,7 +406,8 @@ end
 
 -- called by the PLAYER_LOGIN event handler
 function QuestieInit:Init()
-    ThreadLib.ThreadError(_QuestieInit.StartStageCoroutine, Questie.db.profile.initDelay or 0, l10n("Error during initialization!"))
+    ThreadLib.ThreadError(_QuestieInit.StartStageCoroutine, Questie.db.profile.initDelay or 0,
+        l10n("Error during initialization!"))
 
     if Questie.db.profile.trackerEnabled then
         -- This needs to be called ASAP otherwise tracked Achievements in the Blizzard WatchFrame shows upon login

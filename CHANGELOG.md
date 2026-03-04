@@ -1,5 +1,27 @@
 # Changelog
 
+## v9.9.0
+
+### New Ebonhold Quests
+
+#### 🗺️ Azeroth
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50128 | Southern Jungle | Stranglethorn Vale | Complete 6 quests |
+
+#### 🌿 Kalimdor
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50006 | Sandstone Giants | Tanaris | Kill Sandstone Giants |
+| 50130 | Felwood Restoration | Felwood | Complete 6 quests |
+
+### Fixes
+
+- **[Quest]** Fixed `QuestieDB` initialization error caused by missing table depth for custom creature objectives in `EbonholdQuestDB`.
+- **[System]** Adjusted `Questie:Error` output logic so that critical addon-breaking errors always print regardless of the `Enable Debug-PRINT` setting.
+
 ## v9.8.9
 
 ### New Ebonhold Quests

@@ -2,7 +2,7 @@
 
 # Questie (3.3.5a)
 
-![Version](https://img.shields.io/badge/version-v9.7.12-blue.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v9.9.0-blue.svg?style=for-the-badge)
 ![Downloads](https://img.shields.io/github/downloads/Xurkon/PE-Questie/total?style=for-the-badge&color=e67e22)
 [![Documentation](https://img.shields.io/badge/Documentation-View%20Docs-58a6ff?style=for-the-badge)](https://xurkon.github.io/PE-Questie/)
 [![Patreon](https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/Xurkon)
@@ -31,24 +31,29 @@
 ## 🔧 Fixes & Compatibility
 
 ### 🛡️ Nameplates
+
 - Explicitly skips **Ascension Nameplates** to avoid conflicts, while maintaining compatibility with generic nameplate addons.
 
 ### 📊 Quest Tracker
+
 - **Ascension API**: Fully compatible with custom quest APIs; no crashes on auto-turn-in quests.
 - **Header Persistence**: Resolved issues where quest headers would disappear from the tracker.
 - **Dynamic Updates**: Instant refresh when accepting, completing, or abandoning quests.
 - **Combat Safety**: Protected with `pcall` to prevent UI lockups during intense combat updates.
 
 ### 💬 Tooltips
+
 - Fixed all legacy Lua errors.
 - **New Feature**: Displays if an NPC drops an item that starts a quest directly in the tooltip.
 
 ### 🗺️ Maps (Minimap & World Map)
+
 - **Minimap**: Fixed zoom-related Lua errors.
 - **World Map**: Full support for Ascension's `WorldMapFrame` (minimized mode), **Mapster**, and **Magnify-WotLK**.
 - **Icon Cleanup**: Resolved "ghost icon" bug where completed quests remained visible on the map.
 
 ### 📦 Custom IDs
+
 - Native support for large integer IDs common on custom private servers.
 
 ---
@@ -56,9 +61,11 @@
 ## ✨ Features
 
 ### ⚔️ Ascension Scaling
+
 - Quests automatically scale to character level, perfectly matching the Ascension Scaling system.
 
 ### 📍 Visual Map Objectives
+
 Notes for quest starters, turn-ins, and complex objectives are drawn directly on your maps.
 
 <div align="center">
@@ -68,6 +75,7 @@ Notes for quest starters, turn-ins, and complex objectives are drawn directly on
 </div>
 
 ### 📜 Advanced Quest Tracker
+
 - **Smart Tracking**: Automatically tracks quests upon acceptance.
 - **Expanded Capacity**: Displays up to 20 quests (original limit: 5).
 - **Interactive**: Left-click to open the log; Right-click for focus modes or TomTom arrow integration.
@@ -77,6 +85,7 @@ Notes for quest starters, turn-ins, and complex objectives are drawn directly on
 </div>
 
 ### 🗺️ My Journey & Quests by Zone
+
 - **Journey Log**: Record every major step of your adventure.
 - **Completionist View**: Lists all available and completed quests per zone to ensure nothing is missed.
 
@@ -86,6 +95,7 @@ Notes for quest starters, turn-ins, and complex objectives are drawn directly on
 </div>
 
 ### 🔍 Database Search & Config
+
 - **Global Search**: Find any NPC, Object, or Quest in the massive Questie database.
 - **Deep Customization**: Adjust everything from icon scale to tracking logic.
 
@@ -97,9 +107,11 @@ Notes for quest starters, turn-ins, and complex objectives are drawn directly on
 ---
 
 ## 👥 Credits
+
 - **Questie Team** - Original addon developers.
 - **Xurkon** - Private Expansion fork and maintenance.
 - **Project Ascension & Ebonhold Communities** - Testing and data feedback.
 
 ## 📄 License
+
 MIT License - See [LICENSE](LICENSE) for details.
