@@ -1,5 +1,43 @@
 # Changelog
 
+## v9.9.2 — Final Pre-Refactor Release
+
+> ⚠️ **This is the final stable release before a major architectural refactoring.** All active features and quest data from previous releases are preserved. Future versions will introduce breaking changes to improve multi-server support, the database plugin system, and the zone registration API.
+
+### New Ebonhold Quests
+
+#### 🗺️ Azeroth
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50187 | Western Plaguelands Trophy | Western Plaguelands | Kill 1 Rare (tracked rares) |
+
+### NPC Data
+
+- **classicNpcDB.lua** / **EbonholdNpcDB.lua**: Injected spawn coordinates for Western Plaguelands rare NPCs to support quest 50187.
+
+### Documentation
+
+- Completed a full deep-dive code audit of the entire addon codebase.
+- Identified areas for improvement including server-agnostic design, version detection improvements, a plugin architecture for custom server databases, configurable level caps, and several code quality issues.
+- Audit findings exported to the project research folder.
+
+---
+
+## v9.9.1
+
+### New Ebonhold Quests
+
+#### 🗺️ Azeroth
+
+| ID | Quest | Zone | Type |
+|----|-------|------|------|
+| 50057 | Brood of the Black Flight | Burning Steppes | Kill 30 Dragonkin (10 NPCs tracked) |
+
+### NPC Data
+
+- **EbonholdNpcDB.lua**: Injected spawn coordinates for 10 Dragonkin NPCs in Burning Steppes (IDs 7040-7049) to support quest 50057.
+
 ## v9.9.0
 
 ### New Ebonhold Quests

@@ -2,6 +2,63 @@
 local EbonholdDB = QuestieLoader:CreateModule("EbonholdDB")
 
 EbonholdDB.questData = EbonholdDB.questData or {
+    -- Quest 50023: Elemental Frostfall
+    -- Kill 30 elementals in Winterspring
+    [50023] = {
+        [1] = "Elemental Frostfall", -- Quest name
+        [2] = { nil, { 600600 } },   -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 55,                    -- Min level
+        [5] = 60,                    -- Quest level
+        [17] = 618,                  -- Zone (Winterspring)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 30 Elementals in Winterspring"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 2 elemental NPCs in Winterspring
+                    { 14457, 14458 },
+                    14457, -- RootId: Princess Tempestria
+                    "Elemental slain"
+                }
+            }
+        },
+
+        [30] = 30, -- Kill count
+    },
+    -- Quest 50057: Brood of the Black Flight
+    -- Started by object 600600
+    [50057] = {
+        [1] = "Brood of the Black Flight", -- Quest name
+        [2] = { nil, { 600600 } },         -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 55,                          -- Quest level
+        [5] = 48,                          -- Min level
+        [17] = 46,                         -- Zone (Burning Steppes)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill Dragonkin in the Burning Steppes."
+        },
+        [10] = {
+            nil,                                                                    -- [1] creatureObjective
+            nil,                                                                    -- [2] objectObjective
+            nil,                                                                    -- [3] itemObjective
+            nil,                                                                    -- [4] reputationObjective
+            {                                                                       -- [5] killCreditObjective
+                {
+                    { 7040, 7041, 7042, 7043, 7044, 7045, 7046, 7047, 7048, 7049 }, -- IdList
+                    7040,                                                           -- RootId (Black Dragonspawn)
+                    "Dragonkin slain"                                               -- Text
+                }
+            }
+        },
+        [30] = 30, -- Kill count
+    },
+
     -- Quest 50026: Elemental Balance
     -- Started by object 600600, kills of NPCs 17156 or 17157 count (both are elementals)
     [50026] = {
@@ -113,6 +170,36 @@ EbonholdDB.questData = EbonholdDB.questData or {
                     -- 3 rare NPCs in Dragonblight (already in WotLK DB with spawns)
                     { 32417, 32409, 32400 }, -- Scarlet Highlord Daion, Crazed Indu'le Survivor, Tukemuth
                     32417,                   -- RootId: Scarlet Highlord Daion (representative rare)
+                    "Rare slain"
+                }
+            }
+        },
+
+        [30] = 1, -- Kill count (only 1 rare needed)
+    },
+
+    -- Quest 50187: Western Plaguelands Trophy
+    -- Kill 1 rare in Western Plaguelands
+    [50187] = {
+        [1] = "Western Plaguelands Trophy", -- Quest name
+        [2] = { nil, { 600600 } },          -- startedBy: {{npcIds}, {objectIds}, {itemIds}}
+        [4] = 50,                           -- Min level
+        [5] = 55,                           -- Quest level
+        [17] = 28,                          -- Zone (Western Plaguelands)
+        [8] = {
+            "This is a custom objective. Upon completion, you will automatically receive the assigned reward. If you die, the quest will be removed from your quest log. This quest is automatically rewarded upon completion.",
+            "Kill 1 Rare in Western Plaguelands"
+        },
+        [10] = {
+            nil, -- [1] creatureObjective (not used)
+            nil, -- [2] objectObjective (not used)
+            nil, -- [3] itemObjective (not used)
+            nil, -- [4] reputationObjective (not used)
+            {    -- [5] killCreditObjective
+                {
+                    -- 11 rare NPCs in Western Plaguelands
+                    { 1837, 1838, 1839, 1841, 1843, 1844, 1847, 1848, 1850, 1851, 1885 },
+                    1848, -- RootId: Lord Maldazzar (representative rare)
                     "Rare slain"
                 }
             }
@@ -1616,19 +1703,20 @@ EbonholdDB.questData = EbonholdDB.questData or {
             "Kill Sandstone Giants"
         },
         [10] = {
-            nil,              -- [1] creatureObjective (not used)
-            nil,              -- [2] objectObjective (not used)
-            nil,              -- [3] itemObjective (not used)
-            nil,              -- [4] reputationObjective (not used)
-            {                 -- [5] killCreditObjective
+            nil,                                -- [1] creatureObjective (not used)
+            nil,                                -- [2] objectObjective (not used)
+            nil,                                -- [3] itemObjective (not used)
+            nil,                                -- [4] reputationObjective (not used)
+            {                                   -- [5] killCreditObjective
                 {
-                    { 5469 }, -- All NPC IDs
-                    5469,     -- Root ID (Icon/Text)
+                    { 5466, 5467, 5469, 5470 }, -- All giant NPC IDs: Coast Strider, Deep Dweller, Dune Smasher, Raging Dune Smasher
+                    5469,                       -- Root ID (Icon/Text)
                     "Sandstone Giants slain"
                 }
             }
         },
         [30] = 30, -- Objective Count
+
     },
 }
 
